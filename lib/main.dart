@@ -12,7 +12,25 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('hello Flutter'),
+          leading: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Image.asset('assets/harugo.png'),
+              ),
+              SizedBox(
+                width: 220,
+              ),
+              Icon(Icons.settings),
+            ],
+          ),
+        ),
+        body: CircleAvatar(
+          child: Image.asset(
+            'assets/harugo.png',
+          ),
         ),
       ),
     );
