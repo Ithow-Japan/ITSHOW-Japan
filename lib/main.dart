@@ -67,28 +67,49 @@ class MyApp extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Categori(
-                  iconColor: Color(0xFF0071CE),
-                  name: '학습한 문장 수',
-                  time: '1h 30m',
-                  caicon: Icons.chat_outlined,
-                ),
-                Categori(
-                  iconColor: Color(0xFF00883F),
-                  name: '누적 출석일',
-                  time: '30d',
-                  caicon: Icons.calendar_today,
-                ),
-                Categori(
-                  iconColor: Color(0xFFC90000),
-                  name: '연속 출석일',
-                  time: '30d',
-                  caicon: Icons.fireplace_outlined,
-                )
-              ],
+            Container(
+              width: 312,
+              height: 150,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withAlpha(10),
+                      offset: Offset(0, 0),
+                      spreadRadius: 8,
+                      blurRadius: 10,
+                    ),
+                  ]),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Categori(
+                        iconColor: Color(0xFF0071CE),
+                        name: '학습한 문장 수',
+                        time: '1h 30m',
+                        caicon: Icons.chat_outlined,
+                      ),
+                      Categori(
+                        iconColor: Color(0xFF00883F),
+                        name: '누적 출석일',
+                        time: '30d',
+                        caicon: Icons.calendar_today,
+                      ),
+                      Categori(
+                        iconColor: Color(0xFFC90000),
+                        name: '연속 출석일',
+                        time: '30d',
+                        caicon: Icons.fireplace_outlined,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),
