@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:harugo/Widgets/categori.dart';
+import 'package:harugo/Widgets/list.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,8 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
+          backgroundColor: Colors.white,
           leading: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -31,38 +35,43 @@ class MyApp extends StatelessWidget {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage('assets/yumi.png'),
-                    radius: 60,
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 25,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage('assets/yumi.png'),
+                      radius: 60,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: 16,
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '유미',
-                        style: TextStyle(
-                          fontSize: 24,
+                  SizedBox(
+                    width: 16,
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '유미',
+                          style: TextStyle(
+                            fontSize: 24,
+                          ),
                         ),
-                      ),
-                      Text(
-                        'berry04283',
-                        style:
-                            TextStyle(fontSize: 12, color: Color(0xFF9D9D9D)),
-                      ),
-                    ],
+                        Text(
+                          'berry04283',
+                          style:
+                              TextStyle(fontSize: 12, color: Color(0xFF9D9D9D)),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             SizedBox(
               height: 20,
@@ -108,6 +117,49 @@ class MyApp extends StatelessWidget {
                       ),
                     ],
                   ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            UserList(
+              listIcon: Icons.headset_mic,
+              listText: '고객센터',
+            ),
+            UserList(
+              listIcon: Icons.help_outline_rounded,
+              listText: 'FAQ',
+            ),
+            UserList(
+              listIcon: Icons.group,
+              listText: '공식 SNS 방문하기',
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+              child: Divider(
+                color: Color(0xFFDCDCDC),
+                thickness: 1,
+                height: 1,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.logout_rounded,
+                    color: Color(0xFFFF6969),
+                  ),
+                  SizedBox(
+                    width: 30,
+                  ),
+                  Text(
+                    '로그아웃',
+                    style: TextStyle(
+                      color: Color(0xFFFF6969),
+                    ),
+                  )
                 ],
               ),
             ),
