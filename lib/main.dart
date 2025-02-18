@@ -17,13 +17,17 @@ class MyApp extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
-          leading: Row(
+          title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Image.asset('assets/harugo.png'),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Image.asset(
+                    'assets/harugo.png',
+                  ),
+                ),
               ),
               SizedBox(
                 width: 220,
