@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:harugo/Widgets/categori.dart';
 import 'package:harugo/Widgets/list.dart';
 import 'package:harugo/info.dart';
+import 'package:harugo/Widgets/appbar.dart';
+
+void main() => runApp(Mypage());
 
 class Mypage extends StatelessWidget {
   const Mypage({super.key});
@@ -18,17 +21,12 @@ class Mypage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Image.asset(
-                    'assets/rogo.png',
-                    width: 100,
-                  ),
-                ),
-              ),
               SizedBox(
-                width: 220,
+                width: 20,
+              ),
+              AppbarRogo(),
+              SizedBox(
+                width: 190,
               ),
               IconButton(
                 icon: Icon(Icons.settings),
@@ -67,7 +65,7 @@ class Mypage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '유미',
+                          'yumi',
                           style: TextStyle(
                             fontSize: 24,
                           ),
@@ -87,7 +85,7 @@ class Mypage extends StatelessWidget {
               height: 20,
             ),
             Container(
-              width: 312,
+              width: 315,
               height: 150,
               decoration: BoxDecoration(
                   color: Colors.white,
@@ -104,7 +102,6 @@ class Mypage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(
-                    mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Categori(
@@ -146,7 +143,7 @@ class Mypage extends StatelessWidget {
               listText: '공식 SNS 방문하기',
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 37),
               child: Divider(
                 color: Color(0xFFDCDCDC),
                 thickness: 1,
@@ -154,7 +151,7 @@ class Mypage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 43.5),
               child: Row(
                 children: [
                   Icon(

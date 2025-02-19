@@ -71,7 +71,7 @@ class InfoScreen extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             child: const UserTextField(
               userId: "berry04283", // 🚀 ID는 수정 불가
-              nickname: "유미",
+              nickname: "yumi",
               email: "berry04283@gmail.com",
             ),
           ),

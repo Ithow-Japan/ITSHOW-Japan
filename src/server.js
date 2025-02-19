@@ -20,7 +20,7 @@ app.use('/', expressionRoutes);
 app.post("/mock-login", (req, res) => {
   const { id, password } = req.body; // 'username' → 'id' 변경
 
-  if (id === "testuser" && password === "1234") {
+  if (id === "yumi" && password === "yumi1234") {
     res.json({ success: true, token: "mocked-jwt-token" });
   } else {
     res.status(401).json({ success: false, message: "Invalid credentials" });

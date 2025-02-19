@@ -63,6 +63,9 @@ flutter:
     - assets/harugo.png
     - assets/yumi.png
     - assets/rogo.png
+    - assets/Spring_pokoro.png
+    - assets/pokoro.png
+    - assets/fokoro.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

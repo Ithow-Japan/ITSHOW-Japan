@@ -12,7 +12,7 @@ class UserList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 43.5),
       child: Row(
         children: [
           Icon(

@@ -59,7 +59,7 @@ class _LoginState extends State<LoginScreen> {
       );
     } else {
       setState(() {
-        _error = "로그인 실패";
+        _error = "아이디나 비밀번호를 확인해주세요.";
       });
     }
   }
@@ -74,10 +74,7 @@ class _LoginState extends State<LoginScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Image.asset(
-                  'assets/rogo.png',
-                  width: 1000,
-                ),
+                Image.asset('assets/rogo.png'),
                 const SizedBox(height: 30),
                 Form(
                   child: Theme(
