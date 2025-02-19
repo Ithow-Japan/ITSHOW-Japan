@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:harugo/mypage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-void main() => runApp(MyApp());
+void main() => runApp(MyLogin());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyLogin extends StatelessWidget {
+  const MyLogin({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +43,23 @@ class _LoginState extends State<LoginScreen> {
     );
 
     if (response.statusCode == 200) {
-      final responseData = jsonDecode(response.body);
-      print("로그인 성공: ${responseData['message']}");
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("로그인 성공")),
+      Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const Mypage(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(
+              opacity: animation,
+              child: child,
+            );
+          },
+          transitionDuration: const Duration(milliseconds: 300),
+        ),
       );
     } else {
       setState(() {
-        _error = "로그인 실패: ${response.body}";
+        _error = "로그인 실패";
       });
     }
   }
@@ -64,7 +74,10 @@ class _LoginState extends State<LoginScreen> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Image.asset('assets/rogo.png'),
+                Image.asset(
+                  'assets/rogo.png',
+                  width: 1000,
+                ),
                 const SizedBox(height: 30),
                 Form(
                   child: Theme(
