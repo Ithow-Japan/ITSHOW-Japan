@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 
+// 회원가입
 exports.signup = async (req, res) => {
   const { userid, userpw, nickname } = req.body;
 
@@ -28,6 +29,7 @@ exports.signup = async (req, res) => {
   }
 };
 
+// 로그인
 exports.login = (req, res) => {
   const { userid, userpw } = req.body;
 
