@@ -20,13 +20,14 @@ class CategorySection extends StatelessWidget {
         ),
         SizedBox(height: 10),
         SizedBox(
-          height: 200,
-          child: ListView.builder(
+          height: 160,
+          child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            itemCount: categoryData.length,
-            itemBuilder: (context, index) {
-              return _buildCategoryCard(categoryData[index]);
-            },
+            child: Row(
+              children: categoryData.map((data) {
+                return _buildCategoryCard(data);
+              }).toList(),
+            ),
           ),
         ),
       ],
@@ -35,14 +36,15 @@ class CategorySection extends StatelessWidget {
 
   Widget _buildCategoryCard(Map<String, dynamic> data) {
     return Container(
-      width: 100,
+      width: 250,
+      height: 150, //category box height
       margin: EdgeInsets.symmetric(horizontal: 10),
       padding: EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
-          BoxShadow(color: Colors.black12, blurRadius: 6, spreadRadius: 2)
+          BoxShadow(color: Colors.black12, blurRadius: 2, spreadRadius: 2)
         ],
       ),
       child: Column(

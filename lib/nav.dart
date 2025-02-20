@@ -1,12 +1,29 @@
 import 'package:flutter/material.dart';
-import 'main.dart'; // 홈 화면
-import 'Widgets/category_list.dart'; // 카테고리 화면
-import 'mypage.dart'; // 마이페이지 화면
+import 'mypage.dart';
+import 'package:harugo/main.dart'; // 마이페이지 화면
 
 void main() {
-  runApp(HomeScreen());
+  runApp(const NavTestApp());
 }
 
+// ✅ Nav.dart 단독 실행을 위한 테스트용 MaterialApp 추가
+class NavTestApp extends StatelessWidget {
+  const NavTestApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Nav Test',
+      theme: ThemeData(
+        primarySwatch: Colors.orange,
+      ),
+      home: const HomeScreen(), // ✅ 네비게이션 테스트 실행
+    );
+  }
+}
+
+// ✅ 실제 네비게이션 바 코드
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -18,9 +35,9 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    MyApp(), // 홈 화면
-    CategoryList(), // 카테고리 화면
-    Placeholder(), // 퀴즈 페이지 (현재 없음, 빈 화면 대체)
+    MyApp(), // 홈 화면 (추후 변경 가능)
+    Placeholder(), // 카테고리 화면
+    Placeholder(), // 퀴즈 페이지 (아직 없음)
     Mypage(), // 마이페이지
   ];
 
@@ -34,6 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -43,32 +61,32 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.home,
                 color: _selectedIndex == 0
-                    ? Color(0xFFFF6700)
-                    : Color(0xFFAEAEAE)),
+                    ? const Color(0xFFFF6700)
+                    : const Color(0xFFAEAEAE)),
             label: "홈",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.menu,
                 color: _selectedIndex == 1
-                    ? Color(0xFFFF6700)
-                    : Color(0xFFAEAEAE)),
+                    ? const Color(0xFFFF6700)
+                    : const Color(0xFFAEAEAE)),
             label: "카테고리",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.storage, color: Color(0xFFAEAEAE)), // 비활성화
+            icon: const Icon(Icons.storage, color: Color(0xFFAEAEAE)), // 비활성화
             label: "퀴즈",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person,
                 color: _selectedIndex == 3
-                    ? Color(0xFFFF6700)
-                    : Color(0xFFAEAEAE)),
+                    ? const Color(0xFFFF6700)
+                    : const Color(0xFFAEAEAE)),
             label: "마이페이지",
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Color(0xFFFF6700),
-        unselectedItemColor: Color(0xFFAEAEAE),
+        selectedItemColor: const Color(0xFFFF6700),
+        unselectedItemColor: const Color(0xFFAEAEAE),
         onTap: _onItemTapped,
       ),
     );

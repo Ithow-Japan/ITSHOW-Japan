@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:harugo/Widgets/categori.dart';
+import 'package:harugo/widgets/Categori.dart';
 import 'package:harugo/Widgets/list.dart';
 import 'package:harugo/info.dart';
 import 'package:harugo/Widgets/appbar.dart';
@@ -28,14 +28,15 @@ class Mypage extends StatelessWidget {
               SizedBox(
                 width: 190,
               ),
-              IconButton(
-                icon: Icon(Icons.settings),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Info()),
-                  );
-                },
+              Builder(
+                builder: (context) => IconButton(
+                  icon: Icon(Icons.settings),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const Info()),
+                    );
+                  },
+                ),
               ),
             ],
           ),

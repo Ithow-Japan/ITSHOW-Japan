@@ -9,7 +9,6 @@ class AttendanceCheck extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Color(0xFFFFE6D5),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Column(
@@ -22,25 +21,33 @@ class AttendanceCheck extends StatelessWidget {
           SizedBox(height: 8),
           SizedBox(
             height: 50,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: days.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 6.0),
-                  child: Column(
-                    children: [
-                      Icon(
-                        Icons.check_circle,
-                        color:
-                            index < 4 ? Color(0xFFFD6929) : Color(0xFFAEAEAE),
-                        size: 28,
-                      ),
-                      Text(days[index], style: TextStyle(fontSize: 12)),
-                    ],
-                  ),
-                );
-              },
+            child: Container(
+              decoration: BoxDecoration(
+                color: Color(0xFFFFE1D0),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: days.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 12,
+                    ),
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.check_circle_rounded,
+                          color:
+                              index < 4 ? Color(0xFFFD6929) : Color(0xFFAEAEAE),
+                          size: 24,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ],
