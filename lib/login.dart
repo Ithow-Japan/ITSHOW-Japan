@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:harugo/mypage.dart';
+import 'package:harugo/nav.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -47,7 +47,7 @@ class _LoginState extends State<LoginScreen> {
         context,
         PageRouteBuilder(
           pageBuilder: (context, animation, secondaryAnimation) =>
-              const Mypage(),
+              const NavTestApp(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(
               opacity: animation,

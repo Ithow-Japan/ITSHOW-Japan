@@ -53,9 +53,20 @@ class Mypage extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage('assets/yumi.png'),
-                      radius: 60,
+                    child: Container(
+                      decoration:
+                          BoxDecoration(shape: BoxShape.circle, boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withAlpha(10),
+                          blurRadius: 10, // 흐림 정도
+                          spreadRadius: 2, // 그림자 확산 정도
+                          offset: Offset(0, 0), // 그림자 위치 조정
+                        )
+                      ]),
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage('assets/yumi.png'),
+                        radius: 60,
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -93,9 +104,9 @@ class Mypage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withAlpha(10),
+                      color: Colors.black.withAlpha(12),
                       offset: Offset(0, 0),
-                      spreadRadius: 8,
+                      spreadRadius: 3,
                       blurRadius: 10,
                     ),
                   ]),

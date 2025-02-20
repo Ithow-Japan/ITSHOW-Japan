@@ -24,7 +24,7 @@ class _MainPageState extends State<MainPage> {
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 20, left: 16, right: 16),
+            padding: const EdgeInsets.only(top: 2, left: 16, right: 16),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -44,10 +44,10 @@ class _MainPageState extends State<MainPage> {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
-                      boxShadow: const [
+                      boxShadow: [
                         BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 6,
+                          color: Colors.black.withAlpha(10),
+                          blurRadius: 10,
                           spreadRadius: 2,
                         ),
                       ],
@@ -66,11 +66,11 @@ class _MainPageState extends State<MainPage> {
           ),
           DraggableScrollableSheet(
             initialChildSize: 0.6,
-            minChildSize: 0.5,
+            minChildSize: 0.6,
             maxChildSize: 1.0,
             builder: (context, scrollController) {
               return Container(
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
@@ -78,7 +78,7 @@ class _MainPageState extends State<MainPage> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black12,
+                      color: Colors.black.withAlpha(10),
                       blurRadius: 6,
                       spreadRadius: 2,
                     ),

@@ -14,9 +14,12 @@ class CategorySection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "공부하러 가기",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: Text(
+            "공부하러 가기",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
         ),
         SizedBox(height: 10),
         SizedBox(
@@ -44,7 +47,8 @@ class CategorySection extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
-          BoxShadow(color: Colors.black12, blurRadius: 2, spreadRadius: 2)
+          BoxShadow(
+              color: Colors.black.withAlpha(10), blurRadius: 2, spreadRadius: 2)
         ],
       ),
       child: Column(

@@ -21,12 +21,18 @@ class Categori extends StatelessWidget {
           caicon,
           color: iconColor,
         ),
+        SizedBox(
+          height: 8,
+        ),
         Text(
           name,
           style: TextStyle(
             fontSize: 10,
             color: Color(0xFF9D9D9D),
           ),
+        ),
+        SizedBox(
+          height: 4,
         ),
         Text(
           time,
