@@ -4,6 +4,7 @@ const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const expressionRoutes = require('./routes/expressionRoutes');
+const quizRoutes = require('./routes/quizRoutes');
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(express.json()); // 요청 본문을 JSON으로 파싱
 app.use('/', authRoutes);
 app.use('/', categoryRoutes);
 app.use('/', expressionRoutes);
+app.use('/', quizRoutes);
 
 // ✅ MySQL 없이 로그인 테스트할 수 있도록 Mock API 추가
 app.post("/mock-login", (req, res) => {
