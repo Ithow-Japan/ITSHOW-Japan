@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:harugo/Service/category_service.dart';
 import 'package:harugo/models/category_model.dart';
-import 'package:harugo/widgets/categoryWidget.dart';
+import 'package:harugo/widgets/homecategoryWidget.dart';
 
 class Homescreen extends StatelessWidget {
   Homescreen({super.key});
@@ -30,7 +30,7 @@ class Homescreen extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
                   var item = snapshot.data![index];
-                  return CategoryWidget(id: item.id, name: item.name);
+                  return HomeCategoryWidget(id: item.id, name: item.name);
                 },
                 separatorBuilder: (context, index) => SizedBox(
                       width: 20,
