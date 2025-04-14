@@ -1,5 +1,6 @@
 class CategoryModel {
-  final String id, name;
+  final int id;
+  final String name;
 
   CategoryModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],

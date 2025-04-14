@@ -18,17 +18,6 @@ app.use('/', categoryRoutes);
 app.use('/', expressionRoutes);
 app.use('/', quizRoutes);
 
-// ✅ MySQL 없이 로그인 테스트할 수 있도록 Mock API 추가
-app.post("/mock-login", (req, res) => {
-  const { id, password } = req.body; // 'username' → 'id' 변경
-
-  if (id === "yumi" && password === "yumi1234") {
-    res.json({ success: true, token: "mocked-jwt-token" });
-  } else {
-    res.status(401).json({ success: false, message: "Invalid credentials" });
-  }
-});
-
 // 서버 실행
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CategoryWidget extends StatelessWidget {
-  const CategoryWidget({super.key});
+  final int id;
+  final String name;
+
+  const CategoryWidget({
+    super.key,
+    required this.id,
+    required this.name,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +22,8 @@ class CategoryWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withAlpha(50),
-                blurRadius: 10,
+                color: Colors.black.withAlpha(20),
+                blurRadius: 30,
                 offset: Offset(0, 0),
               ),
             ],
@@ -30,7 +37,7 @@ class CategoryWidget extends StatelessWidget {
                 height: 25,
               ),
               Text(
-                "식당 이용",
+                name,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
