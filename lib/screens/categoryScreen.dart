@@ -11,7 +11,21 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffFFD7C5),
+      appBar: AppBar(
+        toolbarHeight: 60,
+        backgroundColor: Color(0xfffff6f3),
+        title: Padding(
+          padding: EdgeInsets.all(30),
+          child: Text(
+            "HARUGO",
+            style: TextStyle(
+              fontSize: 26,
+              color: Color(0xffFF6700),
+            ),
+          ),
+        ),
+      ),
+      backgroundColor: Color(0xfffff6f3),
       body: FutureBuilder(
         future: category,
         builder: (context, snapshot) {
@@ -20,7 +34,11 @@ class CategoryScreen extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
                   var item = snapshot.data![index];
-                  return CategoryWidget(id: item.id, name: item.name);
+                  return CategoryWidget(
+                      id: item.id,
+                      name: item.name,
+                      image_path: item.image_path,
+                      achievement: item.achievement,);
                 },
                 separatorBuilder: (context, index) => SizedBox(
                       height: 20,
