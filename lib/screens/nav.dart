@@ -2,17 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:harugo/screens/categoryScreen.dart';
 import 'package:harugo/screens/homeScreen.dart';
 
-class Nav extends StatefulWidget {
-  const Nav({super.key});
+class NavScreen extends StatelessWidget {
+  const NavScreen({super.key});
 
   @override
-  _NavState createState() => _NavState();
+  Widget build(BuildContext context) {
+    return const MaterialApp(home: NavStateScreen());
+  }
 }
 
-class _NavState extends State<Nav> {
-  int _selectedIndex = 0;
+class NavStateScreen extends StatefulWidget {
+  const NavStateScreen({super.key});
 
-  final List<Widget> _widgetOption = <Widget>[
+  @override
+  State<NavStateScreen> createState() => _NavStateScreen();
+}
+
+class _NavStateScreen extends State<NavStateScreen> {
+  int _selectedIndex = 0;
+  final List<Widget> _widgetOptions = <Widget>[
     Homescreen(),
     CategoryScreen(),
   ];
@@ -26,22 +34,18 @@ class _NavState extends State<Nav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('나의 앱'),
+      backgroundColor: Colors.white,
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      body: _widgetOption.elementAt(_selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
+        selectedItemColor: Color(0xffFD6929),
+        unselectedItemColor: Color(0xffAEAEAE),
         items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: '홈',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.category),
-            label: '카테고리',
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
+          BottomNavigationBarItem(icon: Icon(Icons.menu), label: '카테고리'),
         ],
       ),
     );
