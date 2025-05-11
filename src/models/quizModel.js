@@ -22,7 +22,31 @@ const getLearnedByExpressions = async (expressionsId) => {
     }
 };
 
+// 퀴즈 정답 조회
+const getQuizAnswerById = async (quizId) => {
+ const query = 'SELECT answer FROM quiz WHERE id = ?';
+    try {
+        const [results] = await db.query(query, [quizId]);
+        return results[0];  // 단일 객체 반환
+    } catch (err) {
+        throw err;
+    }
+};
+
+// 퀴즈 결과 저장 (completed 값 업데이트)
+const updateQuizResult = async (quizId, isCorrect) => {
+    const query = 'UPDATE quiz SET completed = ? WHERE id = ?';
+    try {
+        const [result] = await db.query(query, [isCorrect ? 1 : 0, quizId]);
+        return result;
+    } catch (err) {
+        throw err;
+    }
+};
+
 module.exports = { 
     getQuizByExpressions,
-    getLearnedByExpressions
+    getLearnedByExpressions,
+    getQuizAnswerById,
+    updateQuizResult
 };
