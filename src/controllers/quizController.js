@@ -1,14 +1,13 @@
 const quizModel = require('../models/quizModel');
 
 // 표현별 퀴즈 조회
-const getQuizByExpressions = async (req, res) => {
-    const expressionsId = req.params.expressionsId;
+const getQuizByExpressions = async (expressionsId) => {
     try {
         const quiz = await quizModel.getQuizByExpressions(expressionsId);
-        res.json({ status: 'success', data: quiz });
+        return quiz;  // 퀴즈 데이터 반환
     } catch (err) {
         console.error(err);
-        res.status(500).json({ status: 'error', message: 'Server error' });
+        throw new Error('서버 오류');
     }
 };
 

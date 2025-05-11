@@ -1,4 +1,6 @@
 const expressionModel = require('../models/expressionModel');
+const quizModel = require('../models/quizModel');
+
 
 // 선택한 카테고리의 표현 전체 조회
 const getExpressionsByCategory = async (req, res) => {
@@ -42,7 +44,13 @@ const completeExpression = async (req, res) => {
             await expressionModel.updateCategoryAchievement(categoryId);
         }
 
-        res.status(200).json({ message: '표현 완료 및 카테고리 성취도 업데이트 완료' });
+        // 그 후 퀴즈 정보 조회
+        const quiz = await quizModel.getQuizByExpressions(expressionId);
+
+        res.status(200).json({
+            message: '표현 완료 및 카테고리 성취도 업데이트 완료',
+            quiz: quiz // 퀴즈 정보를 응답에 포함
+        });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: '업데이트 실패' });
