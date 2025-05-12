@@ -6,6 +6,7 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const expressionRoutes = require('./routes/expressionRoutes');
 const quizRoutes = require('./routes/quizRoutes');
 const attendanceRoutes = require('./routes/attendanceRouter');
+const userStatusRoutes = require('./routes/userStatusRouter');
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use('/', categoryRoutes);
 app.use('/', expressionRoutes);
 app.use('/', quizRoutes);
 app.use('/', attendanceRoutes);
+app.use('/', userStatusRoutes);
 
 // 서버 실행
 const PORT = process.env.PORT || 3000;

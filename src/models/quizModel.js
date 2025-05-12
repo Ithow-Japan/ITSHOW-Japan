@@ -22,9 +22,9 @@ const getLearnedByExpressions = async (expressionsId) => {
     }
 };
 
-// 퀴즈 정답 조회
+// 퀴즈 정답, 표현 아이디 조회
 const getQuizAnswerById = async (quizId) => {
- const query = 'SELECT answer FROM quiz WHERE id = ?';
+    const query = 'SELECT answer, expressions_id FROM quiz WHERE id = ?';
     try {
         const [results] = await db.query(query, [quizId]);
         return results[0];  // 단일 객체 반환
