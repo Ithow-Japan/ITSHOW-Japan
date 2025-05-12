@@ -1,4 +1,5 @@
 const quizModel = require('../models/quizModel');
+const userStatusModel = require('../models/userStatusModel');
 
 // 표현별 퀴즈 조회
 const getQuizByExpressions = async (expressionsId) => {
@@ -29,7 +30,7 @@ const getLearnedByExpressions = async (req, res) => {
 // 퀴즈 정답 확인
 const submitQuizAnswer = async (req, res) => {
     const { quizId } = req.params;
-    const { selectedOption } = req.body;
+    const { selectedOption, userId } = req.body;
 
     // 1~4 사이의 숫자인지 확인
     if (![1, 2, 3, 4].includes(selectedOption)) {
@@ -38,6 +39,7 @@ const submitQuizAnswer = async (req, res) => {
 
     try {
         const quiz = await quizModel.getQuizAnswerById(quizId); // DB에서 퀴즈 정보 가져오기
+        console.log("quiz:", quiz);
 
         if (!quiz) {
             return res.status(404).json({ message: '해당 퀴즈를 찾을 수 없습니다.' });
@@ -46,6 +48,23 @@ const submitQuizAnswer = async (req, res) => {
         const isCorrect = Number(quiz.answer) === selectedOption; // 정답 비교
 
         await quizModel.updateQuizResult(quizId, isCorrect ? 1 : 0); // 정답이면 completed=1, 틀리면 completed=0
+
+        const expressionId = quiz.expressions_id;
+        
+        // 현재 시간 (last_updated에 사용할 시간)
+        const currentTime = new Date();
+
+        //  만약 정답일 경우 => 진행도와 correct 증가
+        if (userId && expressionId) {
+            await userStatusModel.incrementTotal(userId); // total 증가
+            await userStatusModel.updateLastUpdated(userId, currentTime); // last_updated 갱신
+
+            if (isCorrect) {
+                await userStatusModel.incrementProgressIfCompleted(userId, expressionId); // 진행도 증가
+                await userStatusModel.incrementCorrect(userId); // 정답 수 증가
+                await userStatusModel.updateLastUpdated(userId, currentTime); // last_updated 갱신
+            }
+        }
 
         return res.status(200).json({
             isCorrect,
