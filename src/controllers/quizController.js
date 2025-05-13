@@ -1,5 +1,6 @@
 const quizModel = require('../models/quizModel');
 const userStatusModel = require('../models/userStatusModel');
+const authController  = require('../controllers/authController');
 
 // 표현별 퀴즈 조회
 const getQuizByExpressions = async (expressionsId) => {
@@ -63,6 +64,9 @@ const submitQuizAnswer = async (req, res) => {
                 await userStatusModel.incrementProgressIfCompleted(userId, expressionId); // 진행도 증가
                 await userStatusModel.incrementCorrect(userId); // 정답 수 증가
                 await userStatusModel.updateLastUpdated(userId, currentTime); // last_updated 갱신
+
+                // 정답을 맞힌 경우, 즉시 level과 gage 업데이트
+                await authController.updateGrowFokoro({ body: { id: userId } }, res); 
             }
         }
 

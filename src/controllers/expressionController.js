@@ -45,11 +45,11 @@ const completeExpression = async (req, res) => {
         }
 
         // 그 후 퀴즈 정보 조회
-        const quiz = await quizModel.getQuizByExpressions(expressionId);
+        // const quiz = await quizModel.getQuizByExpressions(expressionId);
 
         res.status(200).json({
             message: '표현 완료 및 카테고리 성취도 업데이트 완료',
-            quiz: quiz // 퀴즈 정보를 응답에 포함
+            // quiz: quiz // 퀴즈 정보를 응답에 포함
         });
     } catch (err) {
         console.error(err);
