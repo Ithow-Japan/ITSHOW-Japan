@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:harugo/screens/categoryScreen.dart';
 import 'package:harugo/screens/homeScreen.dart';
+import 'package:harugo/screens/quizStartScreen.dart';
 import 'package:harugo/screens/quizresult.dart';
 
 class NavScreen extends StatelessWidget {
@@ -24,7 +25,7 @@ class _NavStateScreen extends State<NavStateScreen> {
   final List<Widget> _widgetOptions = <Widget>[
     Homescreen(),
     CategoryScreen(),
-    QuizResultScreen(),
+    QuizStart(),
   ];
 
   void _onItemTapped(int index) {
