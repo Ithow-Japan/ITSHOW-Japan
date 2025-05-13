@@ -13,10 +13,16 @@ const checkAttendance = async (userId, currentDate) => {
 // 출석 기록 추가
 const addAttendance = async (userId, currentDate, streak) => {
   try {
-    const query = 'INSERT INTO attendance (user_id, date, streak) VALUES (?, ?, ?)';
+    const query = `
+    INSERT INTO attendance (user_id, date, streak)
+    VALUES (?, ?, ?)
+    ON DUPLICATE KEY UPDATE 
+      date = VALUES(date),
+      streak = VALUES(streak)
+    `;
     await db.query(query, [userId, currentDate, streak]);
   } catch (error) {
-    throw new Error('출석 삽입 중 오류 발생: ' + error.message);
+    throw new Error('출석 기록 처리 중 오류 발생: ' + error.message);
   }
 };
 
