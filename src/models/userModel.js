@@ -52,7 +52,7 @@ const updateProgress = (id, level, gage, callback) => {
 };
 
 // 포코로 레벨과 게이지 조회 함수
-const getFokoroLevelAndGage = async (id) => {
+const getPokoroLevelAndGage = async (id) => {
   try {
     const query = 'SELECT level, gage FROM user WHERE id = ?';
     const [result] = await db.execute(query, [id]);
@@ -74,5 +74,5 @@ module.exports = {
   findByUserid,
   getCorrectByUserId,
   updateProgress,
-  getFokoroLevelAndGage
+  getPokoroLevelAndGage
 };

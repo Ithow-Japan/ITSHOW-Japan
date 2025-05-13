@@ -3,7 +3,7 @@ const moment = require('moment');  // 날짜 계산을 위한 라이브러리
 
 // 출석 체크
 const markAttendance = async (req, res) => {
-  const userId = req.body.userId;  // 테스트용으로 body에서 userId를 받아옴
+  const userId = req.session.user.id; 
   const currentDate = moment().format('YYYY-MM-DD');  // 현재 날짜
 
   if (!userId) {

@@ -78,23 +78,26 @@ function calculateLevelAndGage(correct) {
   if (correct <= 5) {
     level = 1;
     gage = Math.floor((correct / 10) * 100);
-  } else if (correct <= 10) {
+} else if (correct <= 10) {
     level = 2;
-    gage = Math.floor(((correct - 10) / 10) * 100);
-  } else if (correct <= 15) {  
+    gage = Math.floor(((correct - 5) / 10) * 100);
+} else if (correct <= 15) {
     level = 3;
-    gage = Math.floor(((correct - 20) / 10) * 100);
-  } else {
+    gage = Math.floor(((correct - 10) / 10) * 100);
+} else if (correct <= 20) {  
     level = 4;
+    gage = Math.floor(((correct - 15) / 10) * 100);
+} else {
+    level = 5;
     gage = 100;
-  }
+}
 
   return { level, gage };
 }
 
 // 사용자 진행도 업데이트
-const updateGrowFokoro = async (req, res) => {
-  const { id } = req.body; 
+const updateGrowPokoro = async (req, res) => {
+  const id = req.session.user.id; 
   if (!id) {
     return res.status(400).json({ error: 'id는 필수입니다.' });
   }
@@ -125,21 +128,21 @@ const updateGrowFokoro = async (req, res) => {
 };
 
 // 포코로 레벨과 게이지 조회
-const getFokoroStatus = async (req, res) => {
-  const { id } = req.params;  // URL에서 userid 받기
+const getPokoroStatus = async (req, res) => {
+  const id = req.session.user.id;  // URL에서 userid 받기
 
   try {
-      const fokoroStatus = await User.getFokoroLevelAndGage(id);  // 사용자 정보 조회
+      const pokoroStatus = await User.getPokoroLevelAndGage(id);  // 사용자 정보 조회
 
-      if (!fokoroStatus) {
+      if (!pokoroStatus) {
           return res.status(404).json({ message: '사용자를 찾을 수 없습니다.' });
       }
 
       // 성공적으로 레벨과 게이지를 조회한 경우
       return res.status(200).json({
           message: '포코로 레벨과 게이지 조회 성공',
-          level: fokoroStatus.level,
-          gage: fokoroStatus.gage
+          level: pokoroStatus.level,
+          gage: pokoroStatus.gage
       });
   } catch (err) {
       console.error('포코로 상태 조회 오류:', err);
@@ -151,6 +154,6 @@ module.exports = {
   register,
   login,
   logout,
-  updateGrowFokoro,
-  getFokoroStatus
+  updateGrowPokoro,
+  getPokoroStatus
 };

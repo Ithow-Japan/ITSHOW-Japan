@@ -2,7 +2,7 @@
 
 // 사용자 ID를 받아서 해당 사용자의 레벨에 맞는 포코로 반환
 const getUserPokoroImage = async (req, res) => {
-    const { user_id } = req.params;
+    const user_id = req.session.user.id;
     
     try {
       // 사용자의 레벨을 가져옴
@@ -40,7 +40,7 @@ const getUserPokoroImage = async (req, res) => {
 
 // 사용자가 얻은 포코로 목록을 반환하는 API
 const getUserPokoros = async (req, res) => {
-    const { user_id } = req.params;
+    const user_id = req.session.user.id;
   
     try {
       // 사용자가 얻은 포코로 목록을 가져옴
