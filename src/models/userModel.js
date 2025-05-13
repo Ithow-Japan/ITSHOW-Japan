@@ -29,13 +29,13 @@ const getCorrectByUserId = async (userid) => {
     const [result] = await db.execute(query, [userid]);
     
     if (result.length === 0) {
-      console.error(`User with userid ${userid} not found in user_status table.`);
+      console.error(`user_status 테이블에서 사용자 ID가 ${userid}인 사용자를 찾을 수 없음`);
       return null;
     }
 
     return result[0].correct;
   } catch (err) {
-    console.error('Error fetching correct value:', err);
+    console.error('correct 값을 가져오는 중 오류 발생:', err);
     throw err;
   }
 };
@@ -58,13 +58,13 @@ const getFokoroLevelAndGage = async (id) => {
     const [result] = await db.execute(query, [id]);
 
     if (result.length === 0) {
-      console.error(`User with id ${id} not found.`);
+      console.error(`ID가 ${id}인 사용자를 찾을 수 없음`);
       return null;
     }
 
     return result[0];  // { level, gage }
   } catch (err) {
-    console.error('Error fetching level and gage:', err);
+    console.error('레벨과 게이지를 가져오는 중 오류 발생:', err);
     throw err;
   }
 };

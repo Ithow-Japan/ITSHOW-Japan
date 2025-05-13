@@ -9,7 +9,7 @@ const getUserPokoroImage = async (req, res) => {
       const user = await pokoroModel.getUserLevel(user_id);
   
       if (!user) {
-        return res.status(404).json({ message: 'User not found' });
+        return res.status(404).json({ message: '유저를 찾을 수 없음.' });
       }
   
       const userLevel = user.level;
@@ -18,7 +18,7 @@ const getUserPokoroImage = async (req, res) => {
       const pokoro = await pokoroModel.getPokoroByLevel(userLevel);
   
       if (!pokoro) {
-        return res.status(404).json({ message: 'No pokoro found for this level' });
+        return res.status(404).json({ message: '이 레벨에서 포코로를 찾을 수 없음.' });
       }
   
       // 포코로 이미지를 매핑하는 부분 
@@ -33,8 +33,8 @@ const getUserPokoroImage = async (req, res) => {
         level_required: pokoro.level_required,
       });
     } catch (error) {
-      console.error('Error fetching user pokoro:', error);
-      return res.status(500).json({ message: 'Server error' });
+      console.error('사용자 포코로를 가져오는 중 오류 발생:', error);
+      return res.status(500).json({ message: '서버 오류' });
     }
 };
 
@@ -47,7 +47,7 @@ const getUserPokoros = async (req, res) => {
       const userPokoros = await pokoroModel.getUserPokoros(user_id);
   
       if (!userPokoros || userPokoros.length === 0) {
-        return res.status(404).json({ message: 'No pokoros found for this user' });
+        return res.status(404).json({ message: '이 사용자에게서 포코로를 찾을 수 없음.' });
       }
   
       // 각 포코로에 대한 이미지 URL을 추가하여 반환
@@ -62,8 +62,8 @@ const getUserPokoros = async (req, res) => {
   
       return res.status(200).json(pokorosWithImages);
     } catch (error) {
-      console.error('Error fetching user pokoros:', error);
-      return res.status(500).json({ message: 'Server error' });
+      console.error('"사용자 포코로를 가져오는 중 오류 발생:', error);
+      return res.status(500).json({ message: '서버 오류' });
     }
 };
   

@@ -7,7 +7,7 @@ const getUserLevel = async (user_id) => {
       const [rows] = await db.execute(query, [user_id]);
       return rows[0];  // 사용자의 레벨 반환
     } catch (error) {
-      throw new Error('Error while fetching user level: ' + error.message);
+      throw new Error('사용자 레벨을 가져오는 중 오류 발생: ' + error.message);
     }
 };
 
@@ -29,7 +29,7 @@ const insertUserPokoro = async (user_id, pokoro_name) => {
       const query = 'INSERT INTO user_pokoro (user_id, pokoro_name, date_obtained) VALUES (?, ?, NOW())';
       await db.execute(query, [user_id, pokoro_name]);
     } catch (error) {
-      throw new Error('Error while inserting user pokoro: ' + error.message);
+      throw new Error('사용자 포코로 삽입 중 오류 발생: ' + error.message);
     }
 };
 
@@ -40,7 +40,7 @@ const getUserPokoros = async (user_id) => {
       const [rows] = await db.execute(query, [user_id]);
       return rows;  // 사용자가 얻은 포코로 목록 반환
     } catch (error) {
-      throw new Error('Error while fetching user pokoros: ' + error.message);
+      throw new Error('사용자 포코로 목록을 가져오는 중 오류 발생: ' + error.message);
     }
 };
 

@@ -4,7 +4,7 @@ const db = require('../db/db');
 const getCategories = async () => {
     const query = 'SELECT * FROM category';
     try {
-        const [results] = await db.query(query);  // db.query()로 Promise 사용
+        const [results] = await db.query(query); 
         return results;
     } catch (err) {
         throw err;  // 에러 처리

@@ -1,13 +1,16 @@
 const db = require('../db/db');  
 
+// correct 증가
 async function incrementCorrect(userId) {
     await db.query('UPDATE user_status SET correct = correct + 1 WHERE user_id = ?', [userId]);
 }
 
+// total 증가
 async function incrementTotal(userId) {
     await db.query('UPDATE user_status SET total = total + 1 WHERE user_id = ?', [userId]);
 }
 
+// 마지막 갱신일 업데이트
 async function updateLastUpdated(userId, currentTime) {
     const query = 'UPDATE user_status SET last_updated = ? WHERE user_id = ?';
     try {
@@ -17,6 +20,7 @@ async function updateLastUpdated(userId, currentTime) {
     }
 }
 
+// 학습 진행도 증가
 async function incrementProgressIfCompleted(userId, expressionId) {
     const [rows] = await db.query(`
         SELECT 

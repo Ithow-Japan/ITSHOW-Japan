@@ -7,10 +7,10 @@ const getExpressionsByCategory = async (req, res) => {
     const categoryId = req.params.categoryId;
     try {
         const expressions = await expressionModel.getExpressionsByCategory(categoryId);
-        res.json({ status: 'success', data: expressions });
+        res.json({ status: '성공', data: expressions });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ status: 'error', message: 'Server error' });
+        res.status(500).json({ status: 'error', message: '서버 오류' });
     }
 };
 
@@ -20,12 +20,12 @@ const getLearnedByCategory = async (req, res) => {
     try {
         const expressions = await expressionModel.getLearnedByCategory(categoryId);
         if (expressions.length === 0) {
-            return res.status(404).json({ status: 'error', message: 'No learned expressions found for this category' });
+            return res.status(404).json({ status: 'error', message: '해당 카테고리에서 학습된 표현이 없음.' });
         }
-        res.json({ status: 'success', data: expressions });
+        res.json({ status: '성공', data: expressions });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ status: 'error', message: 'Server error' });
+        res.status(500).json({ status: 'error', message: '서버 오류' });
     }
 };
 
