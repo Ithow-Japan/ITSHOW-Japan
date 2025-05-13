@@ -11,4 +11,22 @@ const getCategories = async () => {
     }
 };
 
-module.exports = { getCategories };
+// 특정 사용자의 카테고리 성취도를 조회하는 함수
+const getCategoryAchievement = async (userId) => {
+    try {
+        const [rows] = await db.query(
+            `SELECT category_id, achievement
+             FROM user_category
+             WHERE user_id = ?`, 
+            [userId]
+        );
+        return rows;  // 결과를 반환
+    } catch (err) {
+        throw new Error('Error retrieving category achievements');
+    }
+};
+
+module.exports = { 
+    getCategories,
+    getCategoryAchievement 
+};
