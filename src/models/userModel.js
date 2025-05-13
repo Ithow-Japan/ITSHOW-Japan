@@ -1,16 +1,26 @@
 const db = require('../db/db');
 
-const User = {
-  create: (userid, hashedPassword, nickname, callback) => {
-    const query = 'INSERT INTO User (userid, userpw, nickname, regDate) VALUES (?, ?, ?, NOW())';
-    db.query(query, [userid, hashedPassword, nickname], callback);
-  },
-  
-  findByUserid: (userid, callback) => {
-    const query = 'SELECT * FROM User WHERE userid = ?';
-    db.query(query, [userid], callback);
+// 새로운 사용자 생성
+const createUser = async (userid, hashedPassword, nickname, email) => {
+  const query = 'INSERT INTO user (userid, userpw, nickname, email, regDate) VALUES (?, ?, ?, ?, NOW())';
+  try {
+    const [result] = await db.execute(query, [userid, hashedPassword, nickname, email]);
+    return result;
+  } catch (err) {
+    throw err;
   }
 };
+
+// 사용자 아이디로 찾기
+const findByUserid = async (userid) => {
+  const query = 'SELECT * FROM user WHERE userid = ?';
+  try {
+    const [rows] = await db.execute(query, [userid]);
+    return rows;
+  } catch (err) {
+    throw err;
+  }
+};  
 
 // 사용자 correct 값을 가져오는 함수
 const getCorrectByUserId = async (userid) => {
@@ -60,7 +70,8 @@ const getFokoroLevelAndGage = async (id) => {
 };
 
 module.exports = {
-  User,
+  createUser,
+  findByUserid,
   getCorrectByUserId,
   updateProgress,
   getFokoroLevelAndGage

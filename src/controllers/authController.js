@@ -1,6 +1,74 @@
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
+
+// 회원가입
+const register = async (req, res) => {
+  const { userid, userpw, nickname, email } = req.body;
+
+  if (!userid || !userpw || !nickname || !email) {
+    return res.status(400).json({ message: '모든 필드를 입력해주세요.' });
+  }
+
+  try {
+    const existingUsers = await User.findByUserid(userid);
+    if (existingUsers.length > 0) {
+      return res.status(409).json({ message: '이미 존재하는 아이디입니다.' });
+    }
+
+    const hashedPassword = await bcrypt.hash(userpw, 10);
+    await User.createUser(userid, hashedPassword, nickname, email);
+    return res.status(201).json({ message: '회원가입 성공' });
+
+  } catch (err) {
+    console.error('회원가입 오류:', err);
+    return res.status(500).json({ message: '서버 오류' });
+  }
+};
+
+// 로그인
+const login = async (req, res) => {
+  const { userid, userpw } = req.body;
+
+  if (!userid || !userpw) {
+    return res.status(400).json({ message: '아이디와 비밀번호를 입력해주세요.' });
+  }
+
+  try {
+    const users = await User.findByUserid(userid);
+
+    if (users.length === 0) {
+      return res.status(401).json({ message: '존재하지 않는 아이디입니다.' });
+    }
+
+    const user = users[0];
+
+    const isMatch = await bcrypt.compare(userpw, user.userpw);
+    if (!isMatch) {
+      return res.status(401).json({ message: '비밀번호가 틀렸습니다.' });
+    }
+
+    req.session.user = {
+      id: user.id,
+      userid: user.userid,
+      nickname: user.nickname
+    };
+
+    return res.status(200).json({ message: '로그인 성공', user: req.session.user });
+
+  } catch (err) {
+    console.error('로그인 오류:', err);
+    return res.status(500).json({ message: '서버 오류' });
+  }
+};
+
+// 로그아웃
+const logout = (req, res) => {
+  req.session.destroy((err) => {
+    if (err) return res.status(500).json({ message: '로그아웃 실패' });
+    res.clearCookie('connect.sid');
+    return res.status(200).json({ message: '로그아웃 성공' });
+  });
+};
 
 // level과 gage를 계산하는 함수
 function calculateLevelAndGage(correct) {
@@ -80,6 +148,9 @@ const getFokoroStatus = async (req, res) => {
 };
 
 module.exports = {
+  register,
+  login,
+  logout,
   updateGrowFokoro,
   getFokoroStatus
 };
