@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:harugo/screens/quizresult.dart';
 import 'package:harugo/widgets/ButtonWidget.dart';
 import 'package:harugo/widgets/textStyleWidget.dart';
 
@@ -33,7 +34,15 @@ class QuizStart extends StatelessWidget {
               height: 246,
             ),
             SizedBox(height: 67),
-            ButtonWidget("퀴즈 시작")
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => QuizResultScreen()));
+              },
+              child: ButtonWidget("퀴즈 시작"),
+            )
           ],
         ),
       ),
