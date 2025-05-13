@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:harugo/screens/quizresult.dart';
+import 'package:harugo/screens/quizScreen.dart';
 import 'package:harugo/widgets/ButtonWidget.dart';
 import 'package:harugo/widgets/textStyleWidget.dart';
 
-class QuizStart extends StatelessWidget {
-  const QuizStart({super.key});
+class QuizStartScreen extends StatelessWidget {
+  const QuizStartScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,10 +36,8 @@ class QuizStart extends StatelessWidget {
             SizedBox(height: 67),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => QuizResultScreen()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => QuizScreen()));
               },
               child: ButtonWidget("퀴즈 시작"),
             )

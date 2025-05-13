@@ -25,7 +25,7 @@ class _NavStateScreen extends State<NavStateScreen> {
   final List<Widget> _widgetOptions = <Widget>[
     Homescreen(),
     CategoryScreen(),
-    QuizStart(),
+    QuizStartScreen(),
   ];
 
   void _onItemTapped(int index) {
