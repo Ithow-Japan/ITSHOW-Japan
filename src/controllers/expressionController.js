@@ -32,6 +32,7 @@ const getLearnedByCategory = async (req, res) => {
 // 특정 표현 완료 처리 + 해당 카테고리 성취도 갱신
 const completeExpression = async (req, res) => {
     const expressionId = req.params.id;
+    const userId = req.session.user.id;
     try {
         // 표현 완료 표시
         await expressionModel.markExpressionAsCompleted(expressionId);
@@ -39,12 +40,15 @@ const completeExpression = async (req, res) => {
         // 해당 표현의 카테고리 ID 조회
         const categoryId = await expressionModel.getCategoryIdByExpressionId(expressionId);
 
-        // 카테고리 성취도 갱신
-        if (categoryId) {
-            await expressionModel.updateCategoryAchievement(categoryId);
+        // 카테고리 ID가 없으면 처리 중지
+        if (!categoryId) {
+            return res.status(400).json({ error: '카테고리 정보를 찾을 수 없습니다.' });
         }
 
-        // 그 후 퀴즈 정보 조회
+        // 카테고리 성취도 갱신
+        await expressionModel.updateCategoryAchievement(userId, categoryId);
+
+        // 그 후 퀴즈 정보 조회 (필요한 경우)
         // const quiz = await quizModel.getQuizByExpressions(expressionId);
 
         res.status(200).json({
