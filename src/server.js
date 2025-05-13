@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
@@ -13,6 +14,11 @@ dotenv.config();
 const app = express();
 app.use(cors()); // CORS 설정 추가
 app.use(express.json()); // 요청 본문을 JSON으로 파싱
+app.use(session({
+  secret: process.env.SESSION_SECRET,  // 환경 변수에서 secret 값을 가져옵니다.
+  resave: false,
+  saveUninitialized: true
+}));
 
 // 라우팅 설정
 app.use('/', authRoutes);
