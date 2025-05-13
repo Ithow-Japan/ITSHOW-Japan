@@ -7,7 +7,7 @@ const getCategories = async (req, res) => {
         res.json(categories);
     } catch (error) {
         console.error(error);
-        res.status(500).send('서버 에러');
+        res.status(500).send('서버 오류');
     }
 };
 

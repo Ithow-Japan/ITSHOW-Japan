@@ -19,12 +19,12 @@ const getLearnedByExpressions = async (req, res) => {
     try {
         const quiz = await expressionModel.getLearnedByExpressions(categoryId);
         if (quiz.length === 0) {
-            return res.status(404).json({ status: 'error', message: 'No learned expressions found for this category' });
+            return res.status(404).json({ status: 'error', message: '이 카테고리에는 학습된 표현이 없습니다.' });
         }
-        res.json({ status: 'success', data: expressions });
+        res.json({ status: '성공', data: expressions });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ status: 'error', message: 'Server error' });
+        res.status(500).json({ status: 'error', message: '서버 오류' });
     }
 };
 
@@ -86,18 +86,18 @@ const saveQuizResult = async (req, res) => {
     const { completed } = req.body;
 
     if (typeof completed !== 'number') {
-        return res.status(400).json({ message: 'completed (0 or 1) is required' });
+        return res.status(400).json({ message: 'completed 값(0 또는 1)은 필수입니다.' });
     }
 
     try {
         const result = await quizModel.updateQuizResult(quizId, completed);
         if (result.affectedRows === 0) {
-            return res.status(404).json({ message: 'Quiz not found or not updated' });
+            return res.status(404).json({ message: '퀴즈를 찾을 수 없거나 업데이트되지 않았습니다.' });
         }
 
-        return res.status(200).json({ message: 'Quiz result updated successfully' });
+        return res.status(200).json({ message: '퀴즈 결과 성공적으로 업데이트됨.' });
     } catch (err) {
-        return res.status(500).json({ message: 'Failed to update quiz result', error: err.message });
+        return res.status(500).json({ message: '퀴즈 결과 업데이트 실패: ', error: err.message });
     }
 };
 

@@ -6,7 +6,7 @@ const checkAttendance = async (userId, currentDate) => {
     const [rows] = await db.query('SELECT * FROM attendance WHERE user_id = ? AND date = ?', [userId, currentDate]);
     return rows; // 조회된 결과 반환
   } catch (error) {
-    throw new Error('Error checking attendance: ' + error.message);
+    throw new Error('출석 확인 오류: ' + error.message);
   }
 };
 
@@ -16,7 +16,7 @@ const addAttendance = async (userId, currentDate, streak) => {
     const query = 'INSERT INTO attendance (user_id, date, streak) VALUES (?, ?, ?)';
     await db.query(query, [userId, currentDate, streak]);
   } catch (error) {
-    throw new Error('Error adding attendance: ' + error.message);
+    throw new Error('출석 삽입 중 오류 발생: ' + error.message);
   }
 };
 

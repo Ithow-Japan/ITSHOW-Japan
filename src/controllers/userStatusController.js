@@ -1,5 +1,6 @@
 const userStatusModel = require('../models/userStatusModel');
 
+// correct 증가
 async function addCorrect(req, res) {
     const { userId } = req.body;
     try {
@@ -7,10 +8,11 @@ async function addCorrect(req, res) {
         res.json({ message: 'Correct +1' });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Update failed' });
+        res.status(500).json({ error: '업데이트 실패' });
     }
 }
 
+// total 증가
 async function addTotal(req, res) {
     const { userId } = req.body;
     try {
@@ -18,10 +20,11 @@ async function addTotal(req, res) {
         res.json({ message: 'Total +1' });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Update failed' });
+        res.status(500).json({ error: '업데이트 실패' });
     }
 }
 
+// 학습 진행도 증가
 async function updateProgress(req, res) {
     const { userId, expressionId } = req.body;
     try {
@@ -29,7 +32,7 @@ async function updateProgress(req, res) {
         res.json({ message: updated ? 'Progress +3.2258%' : '조건 불충분으로 progress 미증가' });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Update failed' });
+        res.status(500).json({ error: '업데이트 실패' });
     }
 }
 
