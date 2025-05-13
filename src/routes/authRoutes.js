@@ -1,10 +1,13 @@
 const express = require('express');
-const { signup, login } = require('../controllers/authController');
+const authController  = require('../controllers/authController');
 
 const router = express.Router();
 
-router.post('/signup', signup);
-router.post('/login', login);
+// 포코로 성장 (레벨과 게이지)
+router.get('/grow', authController.updateGrowFokoro);
+
+// 포코로 상태 조회 (레벨과 게이지)
+router.get('/fokoro/:id', authController.getFokoroStatus);
 
 router.get('/auth', (req, res) => {
     res.send('Auth route is working!');
