@@ -76,6 +76,7 @@ flutter:
     - assets/cart.png
     - assets/help.png
     - assets/pokoro_result.png
+    - assets/quiz_pokoro.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
