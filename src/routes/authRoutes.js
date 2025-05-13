@@ -13,10 +13,10 @@ router.post('/login', authController.login);
 router.post('/logout', authController.logout);
 
 // 포코로 성장 (레벨과 게이지)
-router.get('/grow', authController.updateGrowFokoro);
+router.get('/grow', authController.updateGrowPokoro);
 
 // 포코로 상태 조회 (레벨과 게이지)
-router.get('/fokoro/:id', authController.getFokoroStatus);
+router.get('/pokoroStatus', authController.getPokoroStatus);
 
 router.get('/auth', (req, res) => {
     res.send('Auth route is working!');

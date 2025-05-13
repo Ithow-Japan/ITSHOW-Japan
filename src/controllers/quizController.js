@@ -3,13 +3,17 @@ const userStatusModel = require('../models/userStatusModel');
 const authController  = require('../controllers/authController');
 
 // 표현별 퀴즈 조회
-const getQuizByExpressions = async (expressionsId) => {
+const getQuizByExpressions = async (req, res) => {
+    const expressionsId = req.params.expressionsId;
     try {
         const quiz = await quizModel.getQuizByExpressions(expressionsId);
-        return quiz;  // 퀴즈 데이터 반환
+        if (quiz.length === 0) {
+            return res.status(404).json({ status: 'error', message: '해당 표현의 퀴즈를 찾을 수 없습니다.' });
+        }
+        return res.status(200).json({ quiz });
     } catch (err) {
         console.error(err);
-        throw new Error('서버 오류');
+        res.status(500).json({ status: 'error', message: '서버 오류' });
     }
 };
 
@@ -17,21 +21,22 @@ const getQuizByExpressions = async (expressionsId) => {
 const getLearnedByExpressions = async (req, res) => {
     const expressionsId = req.params.expressionsId;
     try {
-        const quiz = await expressionModel.getLearnedByExpressions(categoryId);
-        if (quiz.length === 0) {
-            return res.status(404).json({ status: 'error', message: '이 카테고리에는 학습된 표현이 없습니다.' });
+        const quiz = await quizModel.getLearnedByExpressions(expressionsId);
+        if (!quiz || quiz.length === 0) {
+            return res.status(404).json({ message: '이 표현에는 학습한 퀴즈가 없습니다.' });
         }
-        res.json({ status: '성공', data: expressions });
+        return res.status(200).json({ quiz });
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ status: 'error', message: '서버 오류' });
+        console.error('퀴즈 조회 중 오류:', err);
+        return res.status(500).json({ message: '서버 오류 발생', error: err.message });
     }
 };
 
 // 퀴즈 정답 확인
 const submitQuizAnswer = async (req, res) => {
     const { quizId } = req.params;
-    const { selectedOption, userId } = req.body;
+    const { selectedOption } = req.body;
+    const userId = req.session.user.id;
 
     // 1~4 사이의 숫자인지 확인
     if (![1, 2, 3, 4].includes(selectedOption)) {
@@ -66,7 +71,7 @@ const submitQuizAnswer = async (req, res) => {
                 await userStatusModel.updateLastUpdated(userId, currentTime); // last_updated 갱신
 
                 // 정답을 맞힌 경우, 즉시 level과 gage 업데이트
-                await authController.updateGrowFokoro({ body: { id: userId } }, res); 
+                await authController.updateGrowPokoro(req, res); 
             }
         }
 
