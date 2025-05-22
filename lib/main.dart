@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart'; // <-- 추가
 import 'package:harugo/screens/nav.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // <-- 비동기 초기화 준비
+  await initializeDateFormatting('ko', null); // <-- 한국어 날짜 포맷 로드
   runApp(MyApp());
 }
 

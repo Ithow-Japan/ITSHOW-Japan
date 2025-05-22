@@ -23,7 +23,7 @@ class HomeCategoryWidget extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withAlpha(20),
-                blurRadius: 30,
+                blurRadius: 10,
                 offset: Offset(0, 0),
               ),
             ],
