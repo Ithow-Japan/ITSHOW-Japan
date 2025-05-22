@@ -19,51 +19,97 @@ class Homescreen extends StatelessWidget {
       },
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          title: Text(
-            "HARUGO",
-            style: TextStyle(
-              fontSize: 26,
-              color: Color(0x00ff6700),
-            ),
-          ),
-        ),
-        body: SingleChildScrollView(
-          // 전체 스크롤 가능하게 감쌈
-          child: Column(
-            children: [
-              // 카테고리 데이터 표시
-              FutureBuilder(
-                future: category,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return SizedBox(
-                      height: 200, // 카테고리 위젯 크기 설정
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          var item = snapshot.data![index];
-                          return HomeCategoryWidget(
-                              id: item.id, name: item.name);
-                        },
-                        separatorBuilder: (context, index) => SizedBox(
-                          width: 20,
-                        ),
-                        itemCount: snapshot.data!.length,
+        body: Column(
+          children: [
+            Stack(
+              children: [
+                Image.asset(
+                  "assets/pokoro_main.png",
+                  height: 340,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+                Positioned(
+                  child: Padding(
+                    padding: EdgeInsets.all(34),
+                    child: Text(
+                      "HARUGO",
+                      style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.white,
                       ),
-                    );
-                  } else {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                },
-              ),
-              SizedBox(height: 20), // 카테고리와 출석체크 사이 간격
-
-            ],
-          ),
+                    ),
+                  ),
+                ),
+                Transform.translate(
+                  offset: Offset(0, 320),
+                  child: Expanded(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height - 320,
+                      width: double.infinity,
+                      padding: EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(24)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 10,
+                            offset: Offset(0, -4),
+                          ),
+                        ],
+                      ),
+                      child: Column(
+                        children: [
+                          AttendanceWidget(attendanceDates: [
+                            '2025-05-20', // 화요일 출석
+                            '2025-05-21', // 수요일 출석
+                          ], currentDate: DateTime(2025, 5, 22)),
+                          SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                // 카테고리 영역
+                                FutureBuilder(
+                                  future: category,
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      return SizedBox(
+                                        height: 200,
+                                        child: ListView.separated(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                          scrollDirection: Axis.horizontal,
+                                          itemBuilder: (context, index) {
+                                            var item = snapshot.data![index];
+                                            return HomeCategoryWidget(
+                                              id: item.id,
+                                              name: item.name,
+                                            );
+                                          },
+                                          separatorBuilder: (context, index) =>
+                                              SizedBox(width: 20),
+                                          itemCount: snapshot.data!.length,
+                                        ),
+                                      );
+                                    } else {
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    }
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
         ),
       ),
     );

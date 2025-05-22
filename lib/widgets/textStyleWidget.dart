@@ -9,8 +9,8 @@ class TextStyled extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        color: Color(0xff1F1F1F),
         fontSize: 24,
+        color: Color(0xff1F1F1F),
       ),
     );
   }
