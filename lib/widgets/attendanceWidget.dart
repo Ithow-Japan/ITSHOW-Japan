@@ -13,7 +13,6 @@ class AttendanceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 이번 주 월요일 구하기
     final DateTime monday =
         currentDate.subtract(Duration(days: currentDate.weekday - 1));
 
@@ -67,10 +66,6 @@ class AttendanceWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 6),
-              Text(
-                DateFormat('M/d').format(date),
-                style: TextStyle(fontSize: 12, color: Colors.black54),
-              ),
             ],
           );
         },
