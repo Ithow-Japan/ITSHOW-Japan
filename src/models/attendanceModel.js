@@ -26,4 +26,24 @@ const addAttendance = async (userId, currentDate, streak) => {
   }
 };
 
-module.exports = { checkAttendance, addAttendance };
+// 출석 기록 가져오기
+const getAttendance = async (userId) => {
+  try {
+    const [rows] = await db.query(
+      `SELECT 
+        id,
+        user_id,
+        DATE_FORMAT(date, '%Y-%m-%d') AS date,
+        streak,
+        DATE_FORMAT(created_at, '%H:%i:%s') AS created_at
+      FROM attendance
+      WHERE user_id = ?`,
+      [userId]
+    );
+    return rows;
+  } catch (error) {
+    throw new Error('출석 데이터 조회 오류: ' + error.message);
+  }
+};
+
+module.exports = { checkAttendance, addAttendance, getAttendance };
