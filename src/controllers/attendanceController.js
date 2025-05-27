@@ -1,4 +1,4 @@
-const { checkAttendance, addAttendance } = require('../models/attendanceModel');
+const { checkAttendance, addAttendance, getAttendance } = require('../models/attendanceModel');
 const moment = require('moment');  // 날짜 계산을 위한 라이브러리
 
 // 출석 체크
@@ -41,4 +41,21 @@ const markAttendance = async (req, res) => {
   }
 };
 
-module.exports = { markAttendance };
+// 출석 기록 전체 조회
+const getAttendanceData = async (req, res) => {
+  const userId = req.session.user.id; 
+
+  if (!userId) {
+    return res.status(400).json({ message: 'userId가 필요합니다.' });
+  }
+
+  try {
+    const records = await getAttendance(userId);
+    res.status(200).json({ message: '출석 기록 조회 성공', data: records });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: '출석 기록 조회 중 오류 발생' });
+  }
+};
+
+module.exports = { markAttendance, getAttendanceData };
