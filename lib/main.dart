@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:harugo/screens/LoginScreen.dart';
+import 'package:harugo/screens/Signup.dart';
 import 'package:intl/date_symbol_data_local.dart'; // <-- 추가
 import 'package:harugo/screens/nav.dart';
 
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Loginscreen(),
+      home: Signup(),
     );
   }
 }
