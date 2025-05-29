@@ -33,32 +33,41 @@ class _InputWidgetState extends State<InputWidget> {
 
   @override
   Widget build(BuildContext context) {
-    Color borderColor = _isFocused ? Colors.orange : Colors.grey.shade400;
-    Color iconColor = _isFocused ? Colors.orange : Colors.grey;
+    Color iconColor = _isFocused ? Color(0xffFD6929) : Color(0xffD9D9D9);
 
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      width: 312,
+      height: 46,
+      margin: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
-        border: Border.all(color: borderColor, width: 2),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        children: [
-          Icon(widget.icon.icon, color: iconColor),
-          const SizedBox(width: 12),
-          Expanded(
-            child: TextFormField(
-              focusNode: _focusNode,
-              obscureText: widget.password,
-              decoration: InputDecoration(
-                hintText: widget.label,
-                border: InputBorder.none,
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black12.withAlpha(10),
+              offset: Offset(0, 0),
+              blurRadius: 8,
+            )
+          ]),
+      child: Center(
+        child: Row(
+          children: [
+            SizedBox(width: 24),
+            Icon(widget.icon.icon, color: iconColor),
+            SizedBox(width: 16),
+            Expanded(
+              child: TextFormField(
+                focusNode: _focusNode,
+                obscureText: widget.password,
+                decoration: InputDecoration(
+                  hintText: widget.label,
+                  border: InputBorder.none,
+                ),
+                style: const TextStyle(fontSize: 12),
               ),
-              style: const TextStyle(fontSize: 16),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
