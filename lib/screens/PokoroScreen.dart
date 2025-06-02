@@ -22,14 +22,26 @@ class PokoroScreen extends StatelessWidget {
         ),
       ),
       backgroundColor: Color(0xffFFE7DD),
-      body: Column(
+      body: Stack(
         children: [
-          Transform.translate(
-            offset: Offset(0, -11),
+          Positioned(
+            top: -80,
+            left: 0,
+            right: 0,
             child: Image.asset("./assets/first_pokoro.png"),
           ),
           Transform.translate(
-            offset: Offset(0, -40),
+            offset: Offset(320, 70),
+            child: Image.asset(
+              'assets/icons/hanger.png',
+              width: 50,
+              height: 50,
+              fit: BoxFit.contain,
+            ),
+          ),
+          Positioned(
+            top: 480,
+            left: MediaQuery.of(context).size.width / 2 - 92,
             child: Container(
               width: 184,
               height: 55,
@@ -39,10 +51,8 @@ class PokoroScreen extends StatelessWidget {
               ),
               child: Center(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      height: 5,
-                    ),
                     Text(
                       "현재 착용 의상",
                       style: TextStyle(
@@ -60,10 +70,13 @@ class PokoroScreen extends StatelessWidget {
               ),
             ),
           ),
-          Transform.translate(
-            offset: Offset(0, -20),
-            child: PokoroContainerWidget(),
-          )
+          Align(
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 560),
+              child: PokoroContainerWidget(),
+            ),
+          ),
         ],
       ),
     );
