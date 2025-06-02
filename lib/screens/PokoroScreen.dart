@@ -30,6 +30,15 @@ class PokoroScreen extends StatelessWidget {
             right: 0,
             child: Image.asset("./assets/first_pokoro.png"),
           ),
+          Transform.translate(
+            offset: Offset(320, 70),
+            child: Image.asset(
+              'assets/icons/hanger.png',
+              width: 50,
+              height: 50,
+              fit: BoxFit.contain,
+            ),
+          ),
           Positioned(
             top: 480,
             left: MediaQuery.of(context).size.width / 2 - 92,
