@@ -14,7 +14,7 @@ class HomeCategoryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: SizedBox(
-        width: 312,
+        width: 260,
         height: 160,
         child: Container(
           decoration: BoxDecoration(
@@ -39,7 +39,7 @@ class HomeCategoryWidget extends StatelessWidget {
               Text(
                 name,
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -49,7 +49,7 @@ class HomeCategoryWidget extends StatelessWidget {
                     "80%",
                     style: TextStyle(
                       color: Color(0xffFD6929),
-                      fontSize: 18,
+                      fontSize: 14,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -61,11 +61,12 @@ class HomeCategoryWidget extends StatelessWidget {
                       "학습완료",
                       style: TextStyle(
                         color: Color(0xff9E9E9E),
+                        fontSize: 10,
                       ),
                     ),
                   ),
                   SizedBox(
-                    width: 157,
+                    width: 100,
                   ),
                   Text(
                     "총 245개",
@@ -82,7 +83,7 @@ class HomeCategoryWidget extends StatelessWidget {
               Flexible(
                 child: Container(
                   margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                  width: 280,
+                  width: 230,
                   height: 50,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
@@ -100,7 +101,7 @@ class HomeCategoryWidget extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        width: 136,
+                        width: 64,
                       ),
                       Icon(Icons.keyboard_arrow_right_rounded),
                     ],

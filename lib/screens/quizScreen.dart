@@ -28,21 +28,22 @@ class QuizScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 44, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 0, 30, 0),
                   child: Text(
                     "10/12",
                     style: TextStyle(
                       color: Color(0xff828282),
+                      fontSize: 10,
                     ),
                   ),
                 ),
               ),
               SizedBox(
-                width: 312,
+                width: 280,
                 child: LinearProgressIndicator(
                   borderRadius: BorderRadius.circular(10),
                   minHeight: 16,
-                  value: 25 / 100.0,
+                  value: 80 / 100.0,
                   backgroundColor: Color(0xffD9D9D9),
                   valueColor: AlwaysStoppedAnimation(Color(0xffFD6929)),
                 ),
@@ -50,10 +51,10 @@ class QuizScreen extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 57,
+            height: 27,
           ),
           Container(
-            width: 312,
+            width: 280,
             height: 113,
             decoration: BoxDecoration(
               border: Border.all(
@@ -78,7 +79,7 @@ class QuizScreen extends StatelessWidget {
                   child: Text(
                     "Q1. 빈 칸에 들어갈 알맞은 표현은 무엇일까요?",
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 10,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -87,19 +88,19 @@ class QuizScreen extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 55,
+            height: 35,
           ),
           QuizBlockWidget(),
           SizedBox(
-            height: 22,
+            height: 10,
           ),
           QuizBlockWidget(),
           SizedBox(
-            height: 22,
+            height: 10,
           ),
           QuizBlockWidget(),
           SizedBox(
-            height: 22,
+            height: 10,
           ),
           QuizBlockWidget(),
           SizedBox(

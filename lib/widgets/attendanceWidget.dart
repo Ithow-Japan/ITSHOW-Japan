@@ -38,8 +38,8 @@ class AttendanceWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                width: 40,
-                height: 40,
+                width: 30,
+                height: 30,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: isFuture
@@ -53,7 +53,7 @@ class AttendanceWidget extends StatelessWidget {
                       ? Text(
                           DateFormat('E', 'ko').format(date),
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 12,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
