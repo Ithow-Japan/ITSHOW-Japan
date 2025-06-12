@@ -16,7 +16,7 @@ class QuizStartScreen extends StatelessWidget {
           "Harugo",
           style: TextStyle(
             color: Color(0xffFF6700),
-            fontSize: 26,
+            fontSize: 20,
           ),
         ),
       ),
@@ -31,7 +31,7 @@ class QuizStartScreen extends StatelessWidget {
             Image.asset(
               'assets/quiz_pokoro.png',
               width: 231,
-              height: 246,
+              height: 200,
             ),
             SizedBox(height: 67),
             GestureDetector(

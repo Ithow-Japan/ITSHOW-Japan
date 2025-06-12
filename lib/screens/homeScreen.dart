@@ -25,7 +25,7 @@ class Homescreen extends StatelessWidget {
               children: [
                 Image.asset(
                   "assets/pokoro_main.png",
-                  height: 340,
+                  height: 290,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
@@ -35,7 +35,7 @@ class Homescreen extends StatelessWidget {
                     child: Text(
                       "HARUGO",
                       style: TextStyle(
-                        fontSize: 26,
+                        fontSize: 20,
                         fontWeight: FontWeight.w400,
                         color: Colors.white,
                       ),
@@ -43,7 +43,7 @@ class Homescreen extends StatelessWidget {
                   ),
                 ),
                 Transform.translate(
-                  offset: Offset(0, 320),
+                  offset: Offset(0, 270),
                   child: Expanded(
                     child: Container(
                       height: MediaQuery.of(context).size.height - 320,
@@ -62,7 +62,13 @@ class Homescreen extends StatelessWidget {
                         ],
                       ),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 4, vertical: 10),
+                            child: Text("이번 주 출석체크"),
+                          ),
                           AttendanceWidget(attendanceDates: [
                             '2025-05-20', // 화요일 출석
                             '2025-05-21', // 수요일 출석
