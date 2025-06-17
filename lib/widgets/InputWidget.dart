@@ -4,8 +4,15 @@ class InputWidget extends StatefulWidget {
   final String label;
   final bool password;
   final Icon icon;
+  final TextEditingController? controller; // 추가
 
-  const InputWidget(this.label, this.password, this.icon, {super.key});
+  const InputWidget(
+    this.label,
+    this.password,
+    this.icon, {
+    this.controller, // optional
+    super.key,
+  });
 
   @override
   State<InputWidget> createState() => _InputWidgetState();
@@ -40,15 +47,16 @@ class _InputWidgetState extends State<InputWidget> {
       height: 46,
       margin: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black12.withAlpha(10),
-              offset: Offset(0, 0),
-              blurRadius: 8,
-            )
-          ]),
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12.withAlpha(10),
+            offset: Offset(0, 0),
+            blurRadius: 8,
+          )
+        ],
+      ),
       child: Center(
         child: Row(
           children: [
@@ -57,6 +65,7 @@ class _InputWidgetState extends State<InputWidget> {
             SizedBox(width: 16),
             Expanded(
               child: TextFormField(
+                controller: widget.controller, // 여기 추가
                 focusNode: _focusNode,
                 obscureText: widget.password,
                 decoration: InputDecoration(

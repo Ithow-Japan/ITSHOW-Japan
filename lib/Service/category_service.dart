@@ -3,12 +3,12 @@ import 'package:http/http.dart' as http;
 import 'package:harugo/models/category_model.dart';
 
 class CategoryService {
-  static final String baseUrl = "http://192.168.1.175:5000/categories";
+  static final String baseUrl = "http://192.168.219.105:5000/categories";
 
   static Future<List<CategoryModel>> getCategory() async {
     List<CategoryModel> categoryInstances = [];
     try {
-      final url = Uri.parse('$baseUrl');
+      final url = Uri.parse(baseUrl);
       final response = await http.get(url);
 
       if (response.statusCode == 200) {

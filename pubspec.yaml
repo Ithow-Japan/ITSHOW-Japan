@@ -30,6 +30,10 @@ flutter_native_splash:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  dio: ^5.0.0
+  cookie_jar: ^4.0.8
+  dio_cookie_manager: ^3.0.0
+  path_provider: ^2.0.15
   flutter:
     sdk: flutter
 
