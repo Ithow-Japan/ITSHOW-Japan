@@ -31,7 +31,7 @@ class PokoroScreen extends StatelessWidget {
             child: Image.asset("./assets/first_pokoro.png"),
           ),
           Transform.translate(
-            offset: Offset(260, 70),
+            offset: Offset(310, 70),
             child: Image.asset(
               'assets/icons/hanger.png',
               width: 40,
@@ -40,32 +40,34 @@ class PokoroScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: 380,
-            left: MediaQuery.of(context).size.width / 2 - 92,
-            child: Container(
-              width: 190,
-              height: 55,
-              decoration: BoxDecoration(
-                color: Color(0xffFD6929),
-                borderRadius: BorderRadius.circular(40),
-              ),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "현재 착용 의상",
-                      style: TextStyle(
-                        fontSize: 6,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+            top: 460,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 80),
+              child: Container(
+                width: 210,
+                height: 62,
+                decoration: BoxDecoration(
+                  color: Color(0xffFD6929),
+                  borderRadius: BorderRadius.circular(40),
+                ),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "현재 착용 의상",
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "봄 포코로",
-                      style: TextStyle(fontSize: 16, color: Colors.white),
-                    ),
-                  ],
+                      Text(
+                        "봄 포코로",
+                        style: TextStyle(fontSize: 20, color: Colors.white),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -73,7 +75,7 @@ class PokoroScreen extends StatelessWidget {
           Align(
             alignment: Alignment.topCenter,
             child: Padding(
-              padding: const EdgeInsets.only(top: 460, left: 20, right: 20),
+              padding: const EdgeInsets.only(top: 560, left: 20, right: 20),
               child: PokoroContainerWidget(),
             ),
           ),

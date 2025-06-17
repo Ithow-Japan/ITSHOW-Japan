@@ -32,33 +32,32 @@ class CategoryWidget extends StatelessWidget {
               ],
             ),
             width: 316,
-            height: 136,
+            height: 156,
             child: Padding(
-              padding: EdgeInsets.fromLTRB(30, 0, 0, 10),
+              padding: EdgeInsets.fromLTRB(30, 0, 30, 10), // 오른쪽 패딩도 추가
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween, // 양쪽 정렬
                     children: [
                       Padding(
                         padding: EdgeInsets.only(top: 10),
                         child: Text(
                           name,
                           style: TextStyle(
-                            fontSize: 10,
+                            fontSize: 18,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(30, 10, 0, 0),
-                        child: Expanded(
-                          child: Image.asset(
-                            width: 80,
-                            height: 80,
-                            image_path,
-                            fit: BoxFit.contain,
-                          ),
+                        padding: EdgeInsets.only(top: 10),
+                        child: Image.asset(
+                          image_path,
+                          width: 80,
+                          height: 80,
+                          fit: BoxFit.contain,
                         ),
                       ),
                     ],
@@ -66,21 +65,21 @@ class CategoryWidget extends StatelessWidget {
                   Text(
                     "총 20개",
                     style: TextStyle(
-                      fontSize: 10,
+                      fontSize: 12,
                       color: Color(0xffC7C7C7),
                     ),
                   ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  SizedBox(
-                    width: 230,
-                    child: LinearProgressIndicator(
-                      borderRadius: BorderRadius.circular(10),
-                      minHeight: 10,
-                      value: achievement / 100.0,
-                      backgroundColor: Color(0xffD9D9D9),
-                      valueColor: AlwaysStoppedAnimation(Color(0xffFD6929)),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: SizedBox(
+                      width: 260,
+                      child: LinearProgressIndicator(
+                        borderRadius: BorderRadius.circular(10),
+                        minHeight: 12,
+                        value: achievement / 100.0,
+                        backgroundColor: Color(0xffD9D9D9),
+                        valueColor: AlwaysStoppedAnimation(Color(0xffFD6929)),
+                      ),
                     ),
                   ),
                 ],
