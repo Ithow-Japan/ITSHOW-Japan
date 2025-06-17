@@ -28,18 +28,18 @@ class QuizScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 30, 0),
+                  padding: const EdgeInsets.fromLTRB(0, 10, 40, 4),
                   child: Text(
                     "10/12",
                     style: TextStyle(
                       color: Color(0xff828282),
-                      fontSize: 10,
+                      fontSize: 12,
                     ),
                   ),
                 ),
               ),
               SizedBox(
-                width: 280,
+                width: 320,
                 child: LinearProgressIndicator(
                   borderRadius: BorderRadius.circular(10),
                   minHeight: 16,
@@ -54,8 +54,8 @@ class QuizScreen extends StatelessWidget {
             height: 27,
           ),
           Container(
-            width: 280,
-            height: 113,
+            width: 320,
+            height: 160,
             decoration: BoxDecoration(
               border: Border.all(
                 color: Color(0xffD9D9D9),
@@ -79,7 +79,7 @@ class QuizScreen extends StatelessWidget {
                   child: Text(
                     "Q1. 빈 칸에 들어갈 알맞은 표현은 무엇일까요?",
                     style: TextStyle(
-                      fontSize: 10,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -92,15 +92,15 @@ class QuizScreen extends StatelessWidget {
           ),
           QuizBlockWidget(),
           SizedBox(
-            height: 10,
+            height: 20,
           ),
           QuizBlockWidget(),
           SizedBox(
-            height: 10,
+            height: 20,
           ),
           QuizBlockWidget(),
           SizedBox(
-            height: 10,
+            height: 20,
           ),
           QuizBlockWidget(),
           SizedBox(

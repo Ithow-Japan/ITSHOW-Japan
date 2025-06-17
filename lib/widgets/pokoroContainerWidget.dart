@@ -20,7 +20,7 @@ class PokoroContainerWidget extends StatelessWidget {
             Text(
               "포코로 수집 게이지",
               style: TextStyle(
-                fontSize: 12,
+                fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -28,7 +28,7 @@ class PokoroContainerWidget extends StatelessWidget {
               height: 8,
             ),
             SizedBox(
-              width: 220,
+              width: 260,
               height: 16,
               child: LinearProgressIndicator(
                 borderRadius: BorderRadius.circular(10),
@@ -45,7 +45,7 @@ class PokoroContainerWidget extends StatelessWidget {
               TextSpan(
                 text: "다음 수집까지 ",
                 style: TextStyle(
-                  fontSize: 8,
+                  fontSize: 10,
                   color: Color(0xff696969),
                 ),
                 children: [

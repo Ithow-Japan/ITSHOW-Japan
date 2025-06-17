@@ -14,7 +14,7 @@ class QuizBlockWidget extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
       ),
-      width: 280,
+      width: 320,
       height: 48,
       child: Align(
         alignment: Alignment.centerLeft,
@@ -23,7 +23,7 @@ class QuizBlockWidget extends StatelessWidget {
           child: Text(
             "1. 잘지내셨어요?",
             style: TextStyle(
-              fontSize: 12,
+              fontSize: 14,
             ),
           ),
         ),

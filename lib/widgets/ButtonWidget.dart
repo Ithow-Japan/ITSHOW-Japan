@@ -11,14 +11,14 @@ class ButtonWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         color: Color(0xffFD6929),
       ),
-      width: 280,
+      width: 320,
       height: 51,
       child: Center(
         child: Text(
           buttonText,
           style: TextStyle(
             color: Colors.white,
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: FontWeight.w500,
           ),
         ),

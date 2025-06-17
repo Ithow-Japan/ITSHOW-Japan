@@ -27,7 +27,7 @@ class AttendanceWidget extends StatelessWidget {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: weekDates.length,
-        separatorBuilder: (_, __) => SizedBox(width: 12),
+        separatorBuilder: (_, __) => SizedBox(width: 15),
         itemBuilder: (context, index) {
           final date = weekDates[index];
           final formattedDate = DateFormat('yyyy-MM-dd').format(date);
@@ -38,8 +38,8 @@ class AttendanceWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                width: 30,
-                height: 30,
+                width: 34,
+                height: 34,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: isFuture
@@ -53,7 +53,7 @@ class AttendanceWidget extends StatelessWidget {
                       ? Text(
                           DateFormat('E', 'ko').format(date),
                           style: TextStyle(
-                            fontSize: 12,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
