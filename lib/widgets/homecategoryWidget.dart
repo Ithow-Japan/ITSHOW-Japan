@@ -39,7 +39,7 @@ class HomeCategoryWidget extends StatelessWidget {
               Text(
                 name,
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -49,8 +49,8 @@ class HomeCategoryWidget extends StatelessWidget {
                     "80%",
                     style: TextStyle(
                       color: Color(0xffFD6929),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   SizedBox(
@@ -61,17 +61,17 @@ class HomeCategoryWidget extends StatelessWidget {
                       "학습완료",
                       style: TextStyle(
                         color: Color(0xff9E9E9E),
-                        fontSize: 10,
+                        fontSize: 12,
                       ),
                     ),
                   ),
                   SizedBox(
-                    width: 100,
+                    width: 110,
                   ),
                   Text(
                     "총 245개",
                     style: TextStyle(
-                      fontSize: 8,
+                      fontSize: 10,
                       color: Color(0xff919191),
                     ),
                   ),
@@ -97,7 +97,7 @@ class HomeCategoryWidget extends StatelessWidget {
                       Text(
                         '이거 345개 주세요',
                         style: TextStyle(
-                          fontSize: 12,
+                          fontSize: 14,
                         ),
                       ),
                       SizedBox(

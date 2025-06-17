@@ -30,8 +30,7 @@ class QuizStartScreen extends StatelessWidget {
             SizedBox(height: 42),
             Image.asset(
               'assets/quiz_pokoro.png',
-              width: 231,
-              height: 200,
+              height: 300,
             ),
             SizedBox(height: 67),
             GestureDetector(

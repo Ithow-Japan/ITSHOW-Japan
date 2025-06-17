@@ -66,7 +66,7 @@ class Homescreen extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10, vertical: 10),
+                          horizontal: 10, vertical: 20),
                       child: Text(
                         "이번 주 출석체크",
                         style: TextStyle(
@@ -84,6 +84,16 @@ class Homescreen extends StatelessWidget {
                     ),
                     SizedBox(height: 20), // 간격 추가
                     // 카테고리 영역
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Text(
+                        "공부하러가기",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
                     FutureBuilder(
                       future: category,
                       builder: (context, snapshot) {
