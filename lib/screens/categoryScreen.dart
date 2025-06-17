@@ -38,7 +38,7 @@ class CategoryScreen extends StatelessWidget {
                     id: item.id,
                     name: item.name,
                     image_path: item.image_path,
-                    achievement: item.achievement,
+                    achievement: 0,
                   );
                 },
                 separatorBuilder: (context, index) => SizedBox(
