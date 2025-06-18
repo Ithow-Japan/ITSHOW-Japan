@@ -3,8 +3,11 @@ import 'package:harugo/Service/category_service.dart';
 import 'package:harugo/models/category_model.dart';
 import 'package:harugo/screens/categoryScreen.dart';
 import 'package:harugo/widgets/homecategoryWidget.dart';
-import 'package:harugo/widgets/AttendanceWidget.dart';
 import 'package:harugo/Service/pokoro_service.dart';
+import 'package:harugo/Service/attendance_service.dart'; // AttendanceService import
+import 'package:harugo/models/attendance_model.dart';
+import 'package:intl/intl.dart';
+import '../widgets/attendanceWidget.dart';
 
 class Homescreen extends StatelessWidget {
   Homescreen({super.key});
@@ -109,10 +112,23 @@ class Homescreen extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: AttendanceWidget(attendanceDates: [
-                          '2025-05-20', // 화요일 출석
-                          '2025-05-21', // 수요일 출석
-                        ], currentDate: DateTime(2025, 6, 19)),
+                        child: FutureBuilder<List<AttendanceModel>>(
+                          future: AttendanceService.getAttendance(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            } else if (snapshot.hasError) {
+                              return Text('출석 데이터 로드 실패: ${snapshot.error}');
+                            } else if (!snapshot.hasData ||
+                                snapshot.data!.isEmpty) {
+                              return const Text('출석 기록이 없습니다.');
+                            } else {
+                              return AttendanceWidget();
+                            }
+                          },
+                        ),
                       ),
                       SizedBox(height: 20), // 간격 추가
                       // 카테고리 영역
