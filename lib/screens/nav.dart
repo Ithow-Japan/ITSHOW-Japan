@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:harugo/screens/categoryScreen.dart';
 import 'package:harugo/screens/homeScreen.dart';
 import 'package:harugo/screens/quizStartScreen.dart';
-import 'package:harugo/screens/quizresult.dart';
+import 'package:harugo/screens/PokoroScreen.dart';
 
 class NavScreen extends StatelessWidget {
   const NavScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: NavStateScreen());
+    return const NavStateScreen();
   }
 }
 
@@ -25,6 +25,7 @@ class _NavStateScreen extends State<NavStateScreen> {
   final List<Widget> _widgetOptions = <Widget>[
     Homescreen(),
     CategoryScreen(),
+    PokoroScreen(),
     QuizStartScreen(),
   ];
 
@@ -49,6 +50,11 @@ class _NavStateScreen extends State<NavStateScreen> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
           BottomNavigationBarItem(icon: Icon(Icons.menu), label: '카테고리'),
+          BottomNavigationBarItem(
+              icon: ImageIcon(
+                AssetImage("./assets/icons/pokoro_icons.png"),
+              ),
+              label: "포코로"),
           BottomNavigationBarItem(icon: Icon(Icons.quiz), label: '퀴즈')
         ],
       ),

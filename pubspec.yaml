@@ -30,6 +30,10 @@ flutter_native_splash:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  dio: ^5.0.0
+  cookie_jar: ^4.0.8
+  dio_cookie_manager: ^3.0.0
+  path_provider: ^2.0.15
   flutter:
     sdk: flutter
 
@@ -67,7 +71,6 @@ flutter:
     - assets/harugo.png
     - assets/yumi.png
     - assets/rogo.png
-    - assets/Spring_pokoro.png
     - assets/pokoro.png
     - assets/fokoro.json
     - assets/splash.png
@@ -79,6 +82,9 @@ flutter:
     - assets/pokoro_result.png
     - assets/quiz_pokoro.png
     - assets/pokoro_main.png
+    - assets/first_pokoro.png
+    - assets/icons/pokoro_icons.png
+    - assets/icons/hanger.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

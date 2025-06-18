@@ -35,13 +35,14 @@ class CategoryScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   var item = snapshot.data![index];
                   return CategoryWidget(
-                      id: item.id,
-                      name: item.name,
-                      image_path: item.image_path,
-                      achievement: item.achievement,);
+                    id: item.id,
+                    name: item.name,
+                    image_path: item.image_path,
+                    achievement: 0,
+                  );
                 },
                 separatorBuilder: (context, index) => SizedBox(
-                      height: 20,
+                      height: 5,
                     ),
                 itemCount: snapshot.data!.length);
           } else {
