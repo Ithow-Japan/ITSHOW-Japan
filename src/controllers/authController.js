@@ -115,12 +115,12 @@ const updateGrowPokoro = async (req, res) => {
 
     await User.updateProgress(id, level, gage);
 
-    // res.json({
-    //   message: '포코로 진행도 업데이트 완료',
-    //   id,
-    //   level,
-    //   gage,
-    // });
+    res.json({
+      message: '포코로 진행도 업데이트 완료',
+      id,
+      level,
+      gage,
+    });
   } catch (err) {
     console.error('DB 업데이트 오류:', err);
     return res.status(500).json({ error: 'DB 업데이트 실패' });
