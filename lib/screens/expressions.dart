@@ -9,7 +9,6 @@ class ExpressionScreen extends StatelessWidget {
   const ExpressionScreen({super.key, required this.id});
 
   Future<Map<String, dynamic>> _fetchData(int id) async {
-    // 두 요청 병렬 처리
     final results = await Future.wait([
       ExpressionsService.getExpressions(id),
       ExpressionsService.getLearnedExpressions(id),
@@ -62,7 +61,7 @@ class ExpressionScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 8),
                     child: ExpressionsCard(
                       expression: expressions[index],
-                      learnedExpressionIds: learnedIds, // ✅ 전달!
+                      learnedExpressionIds: learnedIds,
                     ),
                   );
                 },

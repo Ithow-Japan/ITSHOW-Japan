@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:harugo/models/pokoro_model.dart';
 import 'package:harugo/Service/pokoro_service.dart';
 import 'package:harugo/widgets/pokoroContainerWidget.dart';
+import "../Service/pokoro_status_service.dart";
+import "../models/pokoro_status.model.dart";
 
 class PokoroScreen extends StatelessWidget {
   const PokoroScreen({super.key});
@@ -104,7 +106,22 @@ class PokoroScreen extends StatelessWidget {
                 alignment: Alignment.topCenter,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 560, left: 20, right: 20),
-                  child: PokoroContainerWidget(),
+                  child: FutureBuilder<PokoroStatusModel?>(
+                    future: PokoroStatusService.getPokoroStatus(),
+                    builder: (context, gageSnapshot) {
+                      if (gageSnapshot.connectionState ==
+                          ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      }
+
+                      if (gageSnapshot.hasError || gageSnapshot.data == null) {
+                        return const Text("게이지 정보 없음");
+                      }
+
+                      return PokoroContainerWidget(
+                          gage: gageSnapshot.data!.gage);
+                    },
+                  ),
                 ),
               ),
             ],

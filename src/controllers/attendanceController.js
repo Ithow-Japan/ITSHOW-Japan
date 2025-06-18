@@ -15,7 +15,7 @@ const markAttendance = async (req, res) => {
     const existingAttendance = await checkAttendance(userId, currentDate);
 
     if (existingAttendance.length > 0) {
-      return res.status(400).json({ message: '이미 출석 체크가 되었습니다.' });
+      return res.status(400).json({ message: '이미 출석 체크가 되었습니다.', "checked": true });
     }
 
     // 연속 출석일수 계산 (어제 출석 체크가 있으면 연속 출석 일수 +1)
