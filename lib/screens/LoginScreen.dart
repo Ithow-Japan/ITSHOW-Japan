@@ -4,6 +4,7 @@ import 'package:harugo/widgets/InputWidget.dart';
 import 'package:harugo/widgets/LoginButtonWidget.dart';
 import 'package:harugo/Service/login_service.dart';
 import "package:harugo/screens/Signup.dart";
+import 'package:harugo/Service/cookie_service.dart';
 
 class Loginscreen extends StatefulWidget {
   const Loginscreen({super.key});
@@ -17,6 +18,7 @@ class _LoginscreenState extends State<Loginscreen> {
   final TextEditingController _pwController = TextEditingController();
 
   Future<void> _onLogin() async {
+    await ApiClient().init();
     final id = _idController.text.trim();
     final pw = _pwController.text;
 

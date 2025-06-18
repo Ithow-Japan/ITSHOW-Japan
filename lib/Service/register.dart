@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 Future<bool> register(
     String userid, String email, String userpw, String nickname) async {
   try {
+    await ApiClient().init(); // 반드시 쿠키 매니저 초기화
     final response = await ApiClient().dio.post(
           '/register',
           data: {

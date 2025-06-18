@@ -15,6 +15,7 @@ Future<bool> login(String userid, String userpw) async {
         );
 
     print('로그인 응답: ${response.data}');
+    await ApiClient().printCookies();
     return response.statusCode == 200;
   } catch (e) {
     print('로그인 실패: $e');
