@@ -22,7 +22,7 @@ const getUserPokoroImage = async (req, res) => {
       }
   
       // 포코로 이미지를 매핑하는 부분 
-      const pokoroImage = `/assets/${pokoro.pokoro_name}.png`; 
+      const pokoroImage = `assets/${pokoro.pokoro_name}.png`; 
   
       // 사용자가 포코로를 얻었을 때 user_pokoro 테이블에 삽입
       await pokoroModel.insertUserPokoro(user_id, pokoro.pokoro_name);

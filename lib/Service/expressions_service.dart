@@ -59,4 +59,29 @@ class ExpressionsService {
       return false;
     }
   }
+
+  static Future<List<ExpressionsModel>> getLearnedExpressions(
+      int categoryId) async {
+    List<ExpressionsModel> learnedExpressions = [];
+    try {
+      final response =
+          await _apiClient.dio.get('/expressions/learned/$categoryId');
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> json = response.data;
+        final List<dynamic> expressionList = json['data'];
+
+        for (var item in expressionList) {
+          learnedExpressions.add(ExpressionsModel.fromJson(item));
+        }
+        return learnedExpressions;
+      } else {
+        print("서버 응답 오류: ${response.statusCode}");
+        return [];
+      }
+    } catch (e) {
+      print("학습 표현 조회 중 오류 발생: $e");
+      return [];
+    }
+  }
 }

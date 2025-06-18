@@ -4,15 +4,25 @@ import 'package:harugo/Service/expressions_service.dart';
 
 class ExpressionsCard extends StatefulWidget {
   final ExpressionsModel expression;
+  final List<int> learnedExpressionIds;
 
-  const ExpressionsCard({super.key, required this.expression});
+  const ExpressionsCard(
+      {super.key,
+      required this.expression,
+      required this.learnedExpressionIds});
 
   @override
   State<ExpressionsCard> createState() => _ExpressionsCardState();
 }
 
 class _ExpressionsCardState extends State<ExpressionsCard> {
-  bool isCompleted = false;
+  late bool isCompleted;
+
+  @override
+  void initState() {
+    super.initState();
+    isCompleted = widget.learnedExpressionIds.contains(widget.expression.id);
+  }
 
   String _formatJapanese(String text) {
     return text.replaceFirstMapped(RegExp(r'\s*([（(])'), (match) {
@@ -21,7 +31,7 @@ class _ExpressionsCardState extends State<ExpressionsCard> {
   }
 
   String _formatExample(String text) {
-    return text.replaceFirstMapped(RegExp(r'(B:)'), (match) {
+    return text.replaceAllMapped(RegExp(r'(A:|B:)'), (match) {
       return '\n\n${match.group(1)}';
     });
   }
