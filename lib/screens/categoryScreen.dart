@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:harugo/Service/category_service.dart';
 import 'package:harugo/widgets/categoryWidget.dart';
 import 'package:harugo/models/category_model.dart';
+import 'package:harugo/screens/expressions.dart';
 
 class CategoryScreen extends StatelessWidget {
   CategoryScreen({super.key});
@@ -34,11 +35,22 @@ class CategoryScreen extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
                   var item = snapshot.data![index];
-                  return CategoryWidget(
-                    id: item.id,
-                    name: item.name,
-                    image_path: item.image_path,
-                    achievement: 0,
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ExpressionScreen(id: item.id), // ← id 넘김
+                        ),
+                      );
+                    },
+                    child: CategoryWidget(
+                      id: item.id,
+                      name: item.name,
+                      image_path: item.image_path,
+                      achievement: 0,
+                    ),
                   );
                 },
                 separatorBuilder: (context, index) => SizedBox(
