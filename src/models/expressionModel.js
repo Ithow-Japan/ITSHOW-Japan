@@ -21,9 +21,9 @@ const getLearnedByCategory = async (userId, categoryId) => {
 // 특정 표현을 완료 상태로 표시 (user_expression 테이블에 기록)
 const markExpressionAsCompleted = async (userId, expressionId) => {
     const query = `
-      INSERT INTO user_expression (user_id, expression_id)
-      VALUES (?, ?)
-      ON DUPLICATE KEY UPDATE completed_at = CURRENT_TIMESTAMP
+      INSERT INTO user_expression (user_id, expression_id, completed, completed_at)
+      VALUES (?, ?, 1, CURRENT_TIMESTAMP)
+      ON DUPLICATE KEY UPDATE completed = 1, completed_at = CURRENT_TIMESTAMP
     `;
     await db.query(query, [userId, expressionId]);
 };

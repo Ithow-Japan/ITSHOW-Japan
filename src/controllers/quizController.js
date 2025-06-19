@@ -1,6 +1,6 @@
 const quizModel = require('../models/quizModel');
 const userStatusModel = require('../models/userStatusModel');
-const authController  = require('../controllers/authController');
+const authController = require('../controllers/authController');
 
 // 표현별 퀴즈 조회
 const getQuizByExpressions = async (req, res) => {
@@ -18,19 +18,18 @@ const getQuizByExpressions = async (req, res) => {
 };
 
 // 사용자가 학습 완료한 퀴즈 조회 (user_quiz 기준)
-const getLearnedByExpressions = async (req, res) => {
-    const expressionsId = req.params.expressionsId;
+const getAllCompletedQuizzes = async (req, res) => {
     const userId = req.session.user.id;
 
     try {
-        const quiz = await quizModel.getLearnedByExpressions(userId, expressionsId);
-        if (!quiz || quiz.length === 0) {
-            return res.status(404).json({ message: '이 표현에는 학습한 퀴즈가 없습니다.' });
+        const quizzes = await quizModel.getUserCompletedQuizzesByUser(userId);
+        if (!quizzes || quizzes.length === 0) {
+            return res.status(404).json({ message: '완료된 퀴즈가 없습니다.' });
         }
-        return res.status(200).json({ quiz });
+        res.status(200).json({ quizzes });
     } catch (err) {
-        console.error('퀴즈 조회 중 오류:', err);
-        return res.status(500).json({ message: '서버 오류 발생', error: err.message });
+        console.error('완료된 퀴즈 조회 중 오류:', err);
+        res.status(500).json({ message: '서버 오류 발생', error: err.message });
     }
 };
 
@@ -103,9 +102,9 @@ const saveQuizResult = async (req, res) => {
     }
 };
 
-module.exports = { 
-    getQuizByExpressions, 
-    getLearnedByExpressions,
+module.exports = {
+    getQuizByExpressions,
+    getAllCompletedQuizzes,
     submitQuizAnswer,
-    saveQuizResult  
+    saveQuizResult
 };
