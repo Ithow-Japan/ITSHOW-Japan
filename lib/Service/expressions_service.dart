@@ -7,7 +7,7 @@ class ExpressionsService {
   // ApiClient 인스턴스 가져오기
   static final ApiClient _apiClient = ApiClient();
 
-  // 기존 GET 함수 (Dio 사용)
+  // 특정 카테고리 표현 가져오기
   static Future<List<ExpressionsModel>> getExpressions(int id) async {
     List<ExpressionsModel> expressionInstances = [];
     try {
@@ -31,15 +31,14 @@ class ExpressionsService {
     }
   }
 
-  // POST 함수 (Dio 사용, 쿠키 자동 포함)
+  // 표현 학습 완료 처리
   static Future<bool> completeExpression(int id) async {
     try {
-      // 디버깅용 - 현재 쿠키 상태 확인
       await _apiClient.printCookies();
 
       final response = await _apiClient.dio.post(
         '/expressions/complete/$id',
-        data: {}, // 빈 데이터 또는 필요한 최소 데이터
+        data: {},
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
@@ -60,6 +59,7 @@ class ExpressionsService {
     }
   }
 
+  // 학습된 표현 불러오기
   static Future<List<ExpressionsModel>> getLearnedExpressions(
       int categoryId) async {
     List<ExpressionsModel> learnedExpressions = [];

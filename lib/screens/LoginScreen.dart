@@ -57,7 +57,7 @@ class _LoginscreenState extends State<Loginscreen> {
               children: [
                 const SizedBox(height: 100),
                 const Text(
-                  "HAROGO",
+                  "HARUGO",
                   style: TextStyle(fontSize: 36, color: Color(0xffFF6700)),
                 ),
                 const SizedBox(height: 63),

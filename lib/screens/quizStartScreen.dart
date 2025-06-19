@@ -9,10 +9,10 @@ class QuizStartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffFFF6F3),
+      backgroundColor: const Color(0xffFFF6F3),
       appBar: AppBar(
-        backgroundColor: Color(0xffFFF6F3),
-        title: Text(
+        backgroundColor: const Color(0xffFFF6F3),
+        title: const Text(
           "Harugo",
           style: TextStyle(
             color: Color(0xffFF6700),
@@ -24,21 +24,26 @@ class QuizStartScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextStyled("포코코~"),
-            TextStyled("열심히 표현 학습을 했군!"),
-            TextStyled("이제 퀴즈를 풀러 가보자~"),
-            SizedBox(height: 42),
+            const TextStyled("포코코~"),
+            const TextStyled("열심히 표현 학습을 했군!"),
+            const TextStyled("이제 퀴즈를 풀러 가보자~"),
+            const SizedBox(height: 42),
             Image.asset(
               'assets/quiz_pokoro.png',
               height: 300,
             ),
-            SizedBox(height: 67),
+            const SizedBox(height: 67),
             GestureDetector(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => QuizScreen()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        const QuizScreen(categoryId: 1), // categoryId 전달
+                  ),
+                );
               },
-              child: ButtonWidget("퀴즈 시작"),
+              child: const ButtonWidget("퀴즈 시작"),
             )
           ],
         ),
