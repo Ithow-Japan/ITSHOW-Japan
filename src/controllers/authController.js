@@ -96,34 +96,30 @@ function calculateLevelAndGage(correct) {
 }
 
 // 사용자 진행도 업데이트
-const updateGrowPokoro = async (req, res) => {
-  const id = req.session.user.id; 
+const updateGrowPokoro = async (req) => {
+  const id = req.session?.user?.id;
+
   if (!id) {
-    return res.status(400).json({ error: 'id는 필수입니다.' });
+    console.warn('updateGrowPokoro: 유저 ID 없음');
+    return;
   }
 
   try {
-    const currentCorrect = await User.getCorrectByUserId(id)
+    const currentCorrect = await User.getCorrectByUserId(id);
     
     if (currentCorrect === undefined) {
-      return res.status(404).json({ error: '사용자 정보를 찾을 수 없습니다.' });
+      console.warn(`updateGrowPokoro: user_status에서 사용자 ${id} 정보 없음`);
+      return;
     }
 
     const updatedCorrect = currentCorrect + 0;
-
     const { level, gage } = calculateLevelAndGage(updatedCorrect);
 
     await User.updateProgress(id, level, gage);
 
-    res.json({
-      message: '포코로 진행도 업데이트 완료',
-      id,
-      level,
-      gage,
-    });
+    console.log(`[포코로] ${id}번 유저 레벨 ${level}, 게이지 ${gage}로 업데이트 완료`);
   } catch (err) {
-    console.error('DB 업데이트 오류:', err);
-    return res.status(500).json({ error: 'DB 업데이트 실패' });
+    console.error('updateGrowPokoro: DB 업데이트 실패', err);
   }
 };
 
