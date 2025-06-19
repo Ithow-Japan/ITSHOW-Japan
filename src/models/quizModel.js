@@ -12,15 +12,15 @@ const getQuizByExpressions = async (expressionsId) => {
 };
 
 // 사용자가 학습 완료한 퀴즈 조회
-const getUserCompletedQuizByExpression = async (userId, expressionsId) => {
+const getUserCompletedQuizzesByUser = async (userId) => {
     const query = `
       SELECT q.*
       FROM quiz q
       JOIN user_quiz uq ON q.id = uq.quiz_id
-      WHERE uq.user_id = ? AND q.expressions_id = ? AND uq.completed = 1;
+      WHERE uq.user_id = ? AND uq.completed = 1
     `;
     try {
-        const [results] = await db.query(query, [userId, expressionsId]);
+        const [results] = await db.query(query, [userId]);
         return results;
     } catch (err) {
         throw err;
@@ -55,7 +55,7 @@ const saveUserQuizResult = async (userId, quizId, completed = 1) => {
 
 module.exports = {
     getQuizByExpressions,
-    getLearnedByExpressions: getUserCompletedQuizByExpression,
+    getUserCompletedQuizzesByUser,
     getQuizAnswerById,
     saveUserQuizResult,
 };
