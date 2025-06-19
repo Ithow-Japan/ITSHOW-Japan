@@ -17,17 +17,26 @@ const getExpressionsByCategory = async (req, res) => {
 // 해당 카테고리에서 완료된 표현만 조회
 const getLearnedByCategory = async (req, res) => {
     const categoryId = req.params.categoryId;
+    const userId = req.session.user?.id;
+
+    if (!userId) {
+        return res.status(401).json({ status: 'error', message: '로그인 정보가 없습니다.' });
+    }
+
     try {
-        const expressions = await expressionModel.getLearnedByCategory(categoryId);
+        const expressions = await expressionModel.getLearnedByCategory(userId, categoryId);
+
         if (expressions.length === 0) {
             return res.status(404).json({ status: 'error', message: '해당 카테고리에서 학습된 표현이 없음.' });
         }
+
         res.json({ status: '성공', data: expressions });
     } catch (err) {
         console.error(err);
         res.status(500).json({ status: 'error', message: '서버 오류' });
     }
 };
+
 
 // 특정 표현 완료 처리 + 해당 카테고리 성취도 갱신
 const completeExpression = async (req, res) => {

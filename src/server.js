@@ -2,6 +2,8 @@ const express = require('express');
 const session = require('express-session');
 const dotenv = require('dotenv');
 const cors = require('cors');
+
+// 라우트 불러오기
 const authRoutes = require('./routes/authRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const expressionRoutes = require('./routes/expressionRoutes');
@@ -13,16 +15,30 @@ const pokoroRoutes = require('./routes/pokoroRouter');
 dotenv.config();
 
 const app = express();
-app.use(cors({credentials: true}
-  )); // CORS 설정 추가
-app.use(express.json()); // 요청 본문을 JSON으로 파싱
-app.use(session({
-  secret: process.env.SESSION_SECRET,  // 환경 변수에서 secret 값을 가져옵니다.
-  resave: false,
-  saveUninitialized: true
+
+// CORS 설정
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
 }));
 
-// 라우팅 설정
+// JSON 요청 파싱
+app.use(express.json());
+
+// 세션 설정
+app.use(session({
+  name: 'connect.sid',
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+    maxAge: 1000 * 60 * 60 * 24
+  }
+}));
+
+// 라우터 연결
 app.use('/', authRoutes);
 app.use('/', categoryRoutes);
 app.use('/', expressionRoutes);
@@ -34,5 +50,5 @@ app.use('/', pokoroRoutes);
 // 서버 실행
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, '0.0.0.0', () => {
-  console.log("Server is running on http://0.0.0.0:5000");
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
