@@ -11,7 +11,7 @@ router.get('/quiz/learned/:expressionsId', quizController.getLearnedByExpression
 // 정답 확인
 router.post('/quiz/:quizId/answer', quizController.submitQuizAnswer);
 
-// 결과 저장
+// 수동으로 결과 저장 (필요 시)
 router.post('/quiz/:quizId/result', quizController.saveQuizResult); 
 
 module.exports = router;

@@ -1,10 +1,24 @@
 const db = require('../db/db');
 
+// user_status 초기값 생성 함수 (중복 INSERT 무시)
+async function createUserStatusIfNotExists(userId) {
+  const query = `
+    INSERT IGNORE INTO user_status (user_id, correct, total, progress, last_updated)
+    VALUES (?, 0, 0, 0, NOW())
+  `;
+  await db.query(query, [userId]);
+}
+
 // 새로운 사용자 생성
 const createUser = async (userid, hashedPassword, nickname, email) => {
   const query = 'INSERT INTO user (userid, userpw, nickname, email, regDate) VALUES (?, ?, ?, ?, NOW())';
   try {
     const [result] = await db.execute(query, [userid, hashedPassword, nickname, email]);
+    const newUserId = result.insertId;  // 자동 생성된 PK
+
+    // user_status 초기 행 생성
+    await createUserStatusIfNotExists(newUserId);
+
     return result;
   } catch (err) {
     throw err;
@@ -40,15 +54,15 @@ const getCorrectByUserId = async (userid) => {
   }
 };
 
-// 사용자 레벨과 gage 업데이트 함수
-const updateProgress = (id, level, gage, callback) => {
+// 사용자 레벨과 gage 업데이트 함수 (async/await 스타일로 변경)
+const updateProgress = async (id, level, gage) => {
   const query = 'UPDATE user SET level = ?, gage = ? WHERE id = ?';
-  db.query(query, [level, gage, id], (err, result) => {
-      if (err) {
-          return callback(err);
-      }
-      callback(null, result);
-  });
+  try {
+    const [result] = await db.execute(query, [level, gage, id]);
+    return result;
+  } catch (err) {
+    throw err;
+  }
 };
 
 // 포코로 레벨과 게이지 조회 함수
