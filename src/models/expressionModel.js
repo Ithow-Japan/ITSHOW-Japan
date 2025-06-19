@@ -3,29 +3,29 @@ const db = require('../db/db');
 // 선택한 카테고리의 표현 전체 조회
 const getExpressionsByCategory = async (categoryId) => {
     const query = 'SELECT * FROM expressions WHERE category_id = ?';
-    try {
-        const [results] = await db.query(query, [categoryId]);
-        return results;
-    } catch (err) {
-        throw err;
-    }
+    const [results] = await db.query(query, [categoryId]);
+    return results;
 };
 
-// 해당 카테고리에서 완료(completed)된 표현만 조회
-const getLearnedByCategory = async (categoryId) => {
-    const query = 'SELECT * FROM expressions WHERE category_id = ? AND completed = 1';
-    try {
-        const [results] = await db.query(query, [categoryId]);
-        return results;
-    } catch (err) {
-        throw err;
-    }
+// 해당 카테고리에서 완료된 표현만 조회 (사용자별 완료 기준)
+const getLearnedByCategory = async (userId, categoryId) => {
+    const query = `
+      SELECT e.* FROM expressions e
+      JOIN user_expression ue ON e.id = ue.expression_id
+      WHERE ue.user_id = ? AND e.category_id = ?
+    `;
+    const [results] = await db.query(query, [userId, categoryId]);
+    return results;
 };
 
-// 특정 표현을 완료 상태로 표시
-const markExpressionAsCompleted = async (expressionId) => {
-    const query = 'UPDATE expressions SET completed = 1 WHERE id = ?';
-    await db.query(query, [expressionId]);
+// 특정 표현을 완료 상태로 표시 (user_expression 테이블에 기록)
+const markExpressionAsCompleted = async (userId, expressionId) => {
+    const query = `
+      INSERT INTO user_expression (user_id, expression_id)
+      VALUES (?, ?)
+      ON DUPLICATE KEY UPDATE completed_at = CURRENT_TIMESTAMP
+    `;
+    await db.query(query, [userId, expressionId]);
 };
 
 // 카테고리별 표현 개수 설정
@@ -37,20 +37,21 @@ const categoryExpressionCount = {
     5: 7
 };
 
-// 카테고리의 성취도(achievement)를 계산하여 갱신
+// 사용자별 카테고리의 성취도 계산 후 갱신
 const updateCategoryAchievement = async (userId, categoryId) => {
-    // 해당 카테고리의 표현 개수 가져오기
     const totalExpressions = categoryExpressionCount[categoryId];
     if (!totalExpressions) return;
 
-    // 성취도 계산: 완료된 표현의 개수 / 카테고리의 총 표현 개수 * 100
-    const selectQuery = `
-        SELECT ROUND(100.0 * SUM(CASE WHEN completed = 1 THEN 1 ELSE 0 END) / ?) AS achievement
-        FROM expressions
-        WHERE category_id = ?
+    const query = `
+      SELECT COUNT(*) AS completedCount
+      FROM user_expression ue
+      JOIN expressions e ON ue.expression_id = e.id
+      WHERE ue.user_id = ? AND e.category_id = ?
     `;
-    const [rows] = await db.query(selectQuery, [totalExpressions, categoryId, userId]);
-    const achievement = rows[0]?.achievement ?? 0;
+    const [rows] = await db.query(query, [userId, categoryId]);
+    const completedCount = rows[0]?.completedCount || 0;
+
+    const achievement = Math.round((completedCount / totalExpressions) * 100);
 
     // user_category 테이블에 존재 여부 확인
     const [existing] = await db.query(
@@ -59,13 +60,11 @@ const updateCategoryAchievement = async (userId, categoryId) => {
     );
 
     if (existing.length > 0) {
-        // 이미 존재하면 업데이트
         await db.query(
             `UPDATE user_category SET achievement = ? WHERE user_id = ? AND category_id = ?`,
             [achievement, userId, categoryId]
         );
     } else {
-        // 존재하지 않으면 삽입
         await db.query(
             `INSERT INTO user_category (user_id, category_id, achievement) VALUES (?, ?, ?)`,
             [userId, categoryId, achievement]
