@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:harugo/models/category_achievement_model.dart';
 import 'package:harugo/Service/cookie_service.dart';
 

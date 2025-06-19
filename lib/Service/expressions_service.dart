@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:harugo/models/expressions_model.dart';
 import 'package:harugo/Service/cookie_service.dart';

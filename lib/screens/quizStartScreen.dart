@@ -38,8 +38,9 @@ class QuizStartScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) =>
-                        const QuizScreen(categoryId: 1), // categoryId 전달
+                    builder: (context) => QuizScreen(
+                      categoryIds: [1, 2, 3, 4, 5], // 모든 카테고리 ID 전달
+                    ),
                   ),
                 );
               },

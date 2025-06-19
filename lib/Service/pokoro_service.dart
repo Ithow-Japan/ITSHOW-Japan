@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:harugo/models/pokoro_model.dart';
 import 'package:harugo/Service/cookie_service.dart';
 
@@ -6,8 +5,6 @@ class PokoroService {
   static final ApiClient _apiClient = ApiClient();
 
   static Future<List<PokoroModel>> getPokoro() async {
-    List<PokoroModel> pokoro = [];
-
     try {
       final response = await _apiClient.dio.get("/pokoro");
 

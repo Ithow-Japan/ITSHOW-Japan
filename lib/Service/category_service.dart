@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:harugo/models/category_model.dart';
 
 class CategoryService {
-  static final String baseUrl = "http://172.30.1.58:5000/categories";
+  static final String baseUrl = "http://10.0.2.2:5000/categories";
 
   static Future<List<CategoryModel>> getCategory() async {
     List<CategoryModel> categoryInstances = [];

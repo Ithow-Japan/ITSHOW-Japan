@@ -85,6 +85,10 @@ flutter:
     - assets/first_pokoro.png
     - assets/icons/pokoro_icons.png
     - assets/icons/hanger.png
+    - assets/cook_pokoro.png
+    - assets/artist_pokoro.png
+    - assets/child_pokoro.png
+    - assets/student_pokoro.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

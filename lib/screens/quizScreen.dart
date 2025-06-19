@@ -3,12 +3,11 @@ import 'package:harugo/models/quiz_model.dart';
 import 'package:harugo/Service/quiz_service.dart';
 import 'package:harugo/widgets/ButtonWidget.dart';
 import 'package:harugo/widgets/QuizBlockWidget.dart';
-import '../Service/cookie_service.dart';
 import "../screens/quizresult.dart";
 
 class QuizScreen extends StatefulWidget {
-  final int categoryId;
-  const QuizScreen({super.key, required this.categoryId});
+  final List<int> categoryIds; // 단일 int에서 List<int>로 변경
+  const QuizScreen({super.key, required this.categoryIds});
 
   @override
   State<QuizScreen> createState() => _QuizScreenState();
@@ -20,21 +19,22 @@ class _QuizScreenState extends State<QuizScreen> {
   int _currentIndex = 0;
   int? _selectedAnswer;
   bool _showResult = false;
+  bool _isCorrect = false;
 
   @override
   void initState() {
     super.initState();
-    _quizFuture = QuizService.getQuizListFromLearned(widget.categoryId);
+    // 여러 카테고리 ID를 전달
+    _quizFuture = QuizService.getQuizListFromLearned(widget.categoryIds);
   }
 
   Future<void> _submitAnswerAndNext() async {
-    final currentQuiz = _quizzes[_currentIndex];
     if (_selectedAnswer == null) return;
 
-    bool isCorrect = (_selectedAnswer == currentQuiz.answer);
+    final currentQuiz = _quizzes[_currentIndex];
 
     bool success =
-        await QuizService.submitQuizResult(currentQuiz.id, isCorrect);
+        await QuizService.submitQuizResult(currentQuiz.id, _isCorrect);
 
     if (success) {
       if (_currentIndex < _quizzes.length - 1) {
@@ -42,6 +42,7 @@ class _QuizScreenState extends State<QuizScreen> {
           _currentIndex++;
           _selectedAnswer = null;
           _showResult = false;
+          _isCorrect = false;
         });
       } else {
         Navigator.pushReplacement(
@@ -50,17 +51,26 @@ class _QuizScreenState extends State<QuizScreen> {
         );
       }
     } else {
-      // 실패 처리 로직 필요시 여기에 작성
       print("결과 저장 실패");
     }
   }
 
-  void _selectAnswer(int selected, int correct) {
+  void _selectAnswer(int selected) async {
     if (_showResult) return;
+
+    final currentQuiz = _quizzes[_currentIndex];
 
     setState(() {
       _selectedAnswer = selected;
+    });
+
+    // 서버에 정답 확인 요청
+    bool isCorrect =
+        await QuizService.checkQuizAnswer(currentQuiz.id, selected - 1);
+
+    setState(() {
       _showResult = true;
+      _isCorrect = isCorrect;
     });
   }
 
@@ -70,14 +80,31 @@ class _QuizScreenState extends State<QuizScreen> {
       future: _quizFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return Scaffold(
+            backgroundColor: Colors.white,
+            appBar: AppBar(
+              title: Text("퀴즈"),
+              centerTitle: true,
+              backgroundColor: Colors.white,
+            ),
+            body: Center(child: CircularProgressIndicator()),
+          );
         }
         if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(
+          return Scaffold(
+            backgroundColor: Colors.white,
+            appBar: AppBar(
+              title: const Text("퀴즈"),
+              centerTitle: true,
+              backgroundColor: Colors.white,
+            ),
+            body: const Center(
               child: Text(
-            "퀴즈를 불러올 수 없습니다.",
-            style: TextStyle(color: Colors.white, fontSize: 13),
-          ));
+                "퀴즈를 불러올 수 없습니다.",
+                style: TextStyle(color: Colors.black, fontSize: 13),
+              ),
+            ),
+          );
         }
 
         if (_quizzes.isEmpty) {
@@ -105,7 +132,8 @@ class _QuizScreenState extends State<QuizScreen> {
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            title: const Text("퀴즈"),
+            title: Text(
+                "퀴즈 (${_currentIndex + 1}/${_quizzes.length})"), // 진행 상황 표시
             centerTitle: true,
             backgroundColor: Colors.white,
           ),
@@ -113,6 +141,27 @@ class _QuizScreenState extends State<QuizScreen> {
             padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 20),
             child: Column(
               children: [
+                // 카테고리 정보 표시 (선택사항)
+                if (widget.categoryIds.length > 1)
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(12),
+                    margin: const EdgeInsets.only(bottom: 20),
+                    decoration: BoxDecoration(
+                      color: Colors.blue.shade50,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.blue.shade200),
+                    ),
+                    child: Text(
+                      "카테고리 ${widget.categoryIds.length}개에서 선별된 퀴즈",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.blue.shade700,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
                 Container(
                   width: double.infinity,
                   height: 150,
@@ -127,7 +176,9 @@ class _QuizScreenState extends State<QuizScreen> {
                     child: Text(
                       questionText,
                       style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.bold),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -140,16 +191,15 @@ class _QuizScreenState extends State<QuizScreen> {
                     child: QuizBlockWidget(
                       choiceText: "$choiceNumber. $choiceText",
                       isSelected: _selectedAnswer == choiceNumber,
-                      isCorrect: currentQuiz.answer == choiceNumber,
+                      isCorrect: _isCorrect && _selectedAnswer == choiceNumber,
                       showResult: _showResult,
-                      onTap: () =>
-                          _selectAnswer(choiceNumber, currentQuiz.answer),
+                      onTap: () => _selectAnswer(choiceNumber),
                     ),
                   );
                 }),
                 const Spacer(),
                 ButtonWidget(
-                  "다음 문제",
+                  _currentIndex == _quizzes.length - 1 ? "결과 보기" : "다음 문제",
                   onTap: _showResult ? _submitAnswerAndNext : null,
                 ),
               ],

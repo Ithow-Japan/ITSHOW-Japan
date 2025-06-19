@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import '../models/pokoro_status.model.dart';
 import '../Service/cookie_service.dart'; // ApiClient가 이 안에 있다고 가정
 

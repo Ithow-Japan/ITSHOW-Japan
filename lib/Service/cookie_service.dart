@@ -9,7 +9,7 @@ class ApiClient {
 
   ApiClient._internal() {
     dio = Dio(BaseOptions(
-      baseUrl: 'http://172.30.1.58:5000',
+      baseUrl: 'http://10.0.2.2:5000',
       connectTimeout: const Duration(seconds: 5),
       receiveTimeout: const Duration(seconds: 5),
     ));
@@ -32,7 +32,7 @@ class ApiClient {
   // 디버깅용 - 현재 저장된 쿠키 확인
   Future<void> printCookies() async {
     final cookies =
-        await cookieJar.loadForRequest(Uri.parse('http://172.30.1.58:5000'));
+        await cookieJar.loadForRequest(Uri.parse('http://10.0.2.2:5000'));
     print('현재 저장된 쿠키: $cookies');
   }
 }
