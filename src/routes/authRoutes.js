@@ -12,6 +12,9 @@ router.post('/login', authController.login);
 // 로그아웃
 router.post('/logout', authController.logout);
 
+// 사용자 정보 조회
+router.get('/userInfo', authController.userInfo);
+
 // 포코로 성장 (레벨과 게이지)
 router.get('/grow', authController.updateGrowPokoro);
 

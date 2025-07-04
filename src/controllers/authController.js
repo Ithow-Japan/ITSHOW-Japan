@@ -70,6 +70,32 @@ const logout = (req, res) => {
   });
 };
 
+// 사용자 정보 조회
+const userInfo = async (req, res) => {
+  try {
+    // 세션에서 사용자 id 가져오기
+    const id = req.session.user?.id;
+
+    if (!id) {
+      return res.status(401).json({ error: '로그인이 필요합니다.' });
+    }
+
+    // DB에서 사용자 정보 조회
+    const user = await User.getInfoByUserid(id);
+
+    if (!user) {
+      return res.status(404).json({ error: '사용자를 찾을 수 없습니다.' });
+    }
+
+    // 성공 시 사용자 정보 반환
+    res.json(user);
+
+  } catch (error) {
+    console.error('UserInfo함수 error:', error);
+    res.status(500).json({ error: '서버 오류가 발생했습니다.' });
+  }
+};
+
 // level과 gage를 계산하는 함수
 function calculateLevelAndGage(correct) {
   let level = 1;
@@ -97,7 +123,7 @@ function calculateLevelAndGage(correct) {
 
 // 사용자 진행도 업데이트
 const updateGrowPokoro = async (req) => {
-  const id = req.session?.user?.id;
+  const id = req.session.user.id;
 
   if (!id) {
     console.warn('updateGrowPokoro: 유저 ID 없음');
@@ -150,6 +176,7 @@ module.exports = {
   register,
   login,
   logout,
+  userInfo,
   updateGrowPokoro,
   getPokoroStatus
 };
