@@ -34,7 +34,18 @@ const findByUserid = async (userid) => {
   } catch (err) {
     throw err;
   }
-};  
+};
+
+// 사용자 정보 가져오는 함수
+const getInfoByUserid = async (userid) => {
+  const query = 'SELECT userid, nickname, email, gage, level, regDate FROM user WHERE id = ?';
+  try {
+    const [rows] = await db.execute(query, [userid]);
+    return rows[0] || null;
+  } catch (err) {
+    throw err;
+  }
+};
 
 // 사용자 correct 값을 가져오는 함수
 const getCorrectByUserId = async (userid) => {
@@ -86,6 +97,7 @@ const getPokoroLevelAndGage = async (id) => {
 module.exports = {
   createUser,
   findByUserid,
+  getInfoByUserid,
   getCorrectByUserId,
   updateProgress,
   getPokoroLevelAndGage
